@@ -1,0 +1,759 @@
+[
+  {
+    "title": "Synthèse exécutive",
+    "lead": "Un projet de gouvernance et de protection de l’information, porté par un prototype démontrable.",
+    "paragraphs": [
+      "Le SSDC-RDC, Système de Sécurité des Données Classifiées, est une proposition de plateforme documentaire destinée au contexte institutionnel de la Présidence de la République démocratique du Congo. L’initiative vise à structurer les accès, protéger les contenus et rendre les opérations explicables et traçables.",
+      "Une première tranche logicielle existe : interface web responsive, démonstration publique, socle backend, politiques d’autorisation, chiffrement, dépôt contrôlé et circuit de demandes. Elle constitue une base de travail concrète pour un cadrage et un pilote, sans être un système accrédité ni un déploiement institutionnel opérationnel.",
+      "La décision proposée pour la présentation est d’autoriser un cadrage formel et de définir les conditions d’un pilote isolé sur données fictives. Aucun raccordement à un réseau présidentiel ou à un dépôt réel n’est présumé autorisé."
+    ],
+    "table": [
+      [
+        "Repère",
+        "Situation présentée"
+      ],
+      [
+        "Initiateur et propriétaire",
+        "LOKALA LOMBOTO Jonathan"
+      ],
+      [
+        "Version applicative",
+        "0.1.0 - prototype en évolution"
+      ],
+      [
+        "Démonstration",
+        "Interface publique sur données entièrement fictives"
+      ],
+      [
+        "Décision recherchée",
+        "Cadrage, gouvernance et critères d’un pilote autorisé"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": "Le projet doit être évalué sur ses contrôles, ses preuves et ses limites, et non sur la seule apparence de son interface."
+  },
+  {
+    "title": "Identité du projet et contexte proposé",
+    "lead": "Une initiative située dans un cadre institutionnel précis, sans revendication d’agrément.",
+    "paragraphs": [
+      "Le contexte de rattachement proposé est celui de la Présidence de la République, au Secrétariat Général près le Président de la République, dans le périmètre DANTIC, Division Bases de données, unité Analyse et développement des applications.",
+      "LOKALA LOMBOTO Jonathan est identifié dans ce dossier comme initiateur et propriétaire du projet. Cette attribution ne confère ni une qualité d’autorité de certification ni une autorisation d’exploiter des informations gouvernementales réelles.",
+      "L’emblème national utilisé est l’image fournie par le porteur du projet. Le dossier reprend la même identité visuelle que le manuel : bleu nuit, bleu profond, or et surfaces nacrées, avec des rappels discrets des couleurs nationales."
+    ],
+    "table": [
+      [
+        "Élément",
+        "Identification"
+      ],
+      [
+        "Pays",
+        "République démocratique du Congo"
+      ],
+      [
+        "Institution visée",
+        "Présidence de la République"
+      ],
+      [
+        "Département proposé",
+        "Secrétariat Général près le Président de la République"
+      ],
+      [
+        "Direction / division",
+        "DANTIC / Bases de données"
+      ],
+      [
+        "Unité",
+        "Analyse et développement des applications"
+      ],
+      [
+        "Nature du dossier",
+        "Proposition institutionnelle et présentation d’un prototype"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Problématique et enjeux",
+    "lead": "Maîtriser le cycle documentaire, depuis l’entrée d’un fichier jusqu’à l’expiration de son accès.",
+    "paragraphs": [
+      "Toute organisation traitant des informations sensibles doit pouvoir déterminer qui peut connaître un document, dans quel contexte et pendant combien de temps. Le projet part de ce besoin général ; il ne présente pas comme établies des faiblesses constatées au sein d’une institution particulière.",
+      "Une simple connexion par mot de passe, une arborescence partagée ou un niveau d’habilitation isolé ne suffisent pas à représenter le besoin d’en connaître. Les droits doivent être précis, temporaires lorsque nécessaire, et contrôlés lors de la remise du contenu.",
+      "Le SSDC-RDC propose de réunir classification, contrôle d’accès, protection du contenu et journalisation dans un même parcours. Le dispositif doit également rester compréhensible par les utilisateurs et administrable selon des responsabilités séparées."
+    ],
+    "table": null,
+    "bullets": [
+      "Confidentialité : réduire l’exposition d’un contenu à des destinataires non autorisés.",
+      "Intégrité : détecter l’altération d’un objet chiffré ou de son contexte.",
+      "Traçabilité : expliquer les accès, refus et décisions.",
+      "Disponibilité : encadrer les ressources et préparer la continuité de service."
+    ],
+    "screen": null,
+    "diagram": null,
+    "callout": "Aucune statistique d’incident, d’économie ou de performance institutionnelle n’est inventée dans ce dossier."
+  },
+  {
+    "title": "Vision et objectifs du SSDC-RDC",
+    "lead": "Protéger l’information, préserver la souveraineté nationale.",
+    "paragraphs": [
+      "La vision est celle d’un patrimoine documentaire mieux gouverné : chaque accès repose sur une identité vérifiée, une politique explicite et un besoin d’en connaître. L’objectif est de rendre les règles applicables par le serveur et vérifiables par des tests.",
+      "La souveraineté constitue un objectif de déploiement et de gouvernance : maîtrise des lieux d’hébergement, de l’administration, de la garde des clés, des sauvegardes et des procédures de récupération. Elle ne résulte pas automatiquement du choix d’un langage ou d’un algorithme.",
+      "Les résultats du futur pilote devront être mesurés sur un périmètre défini. Les cibles chiffrées et niveaux de service sont à arrêter avec les responsables métier et techniques, après connaissance de la volumétrie et des contraintes."
+    ],
+    "table": [
+      [
+        "Objectif",
+        "Indicateur proposé pour un pilote"
+      ],
+      [
+        "Accès maîtrisé",
+        "Refus vérifié d’un compte ou droit non autorisé"
+      ],
+      [
+        "Droits temporaires",
+        "Accès effectivement retiré à expiration ou révocation"
+      ],
+      [
+        "Traçabilité",
+        "Événement corrélable pour chaque opération du périmètre"
+      ],
+      [
+        "Intégrité",
+        "Échec de remise d’un contenu altéré"
+      ],
+      [
+        "Continuité",
+        "Restauration réellement exercée et chronométrée"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Bénéficiaires et responsabilités",
+    "lead": "Un même outil, des responsabilités différentes et des droits qui restent séparés.",
+    "paragraphs": [
+      "Les utilisateurs finaux consultent les documents autorisés. Les déposants introduisent des contenus dans leur périmètre. Les propriétaires et approbateurs traitent les demandes selon le besoin déclaré. Les auditeurs examinent les événements dans leur rôle.",
+      "Les opérateurs techniques assurent l’identité, l’infrastructure et la disponibilité. Dans le modèle livré, le rôle d’administrateur ne donne pas implicitement le droit de lire les documents. Les affectations de comptes et d’habilitations sont provisionnées hors interface, sous responsabilité contrôlée.",
+      "Une gouvernance de projet doit désigner un sponsor, des référents métier, un responsable de sécurité, un opérateur d’identité et un responsable de recette. Ces responsabilités sont proposées ; aucune nomination institutionnelle n’est affirmée dans ce dossier."
+    ],
+    "table": [
+      [
+        "Acteur / rôle",
+        "Responsabilité dans la version"
+      ],
+      [
+        "Lecteur (reader)",
+        "Lire uniquement les documents autorisés"
+      ],
+      [
+        "Déposant (uploader + reader)",
+        "Déposer dans son habilitation et ses compartiments"
+      ],
+      [
+        "Approbateur (approver)",
+        "Décider comme propriétaire éligible, sans auto-approbation"
+      ],
+      [
+        "Auditeur (auditor)",
+        "Consulter le journal autorisé"
+      ],
+      [
+        "Administrateur / opérateur",
+        "Gérer le socle sans droit implicite sur le contenu"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Capacités déjà construites",
+    "lead": "Une première tranche fonctionnelle, avec une séparation entre code présent et intégration validée.",
+    "paragraphs": [
+      "Le dépôt contient un backend et un client web reliables dans un environnement de développement configuré. La version publiée en ligne sert une démonstration autonome et fictive ; elle ne déploie pas le serveur documentaire ni l’identité.",
+      "Les éléments ci-dessous constituent le noyau concret du projet. Leur présence dans le code ne remplace pas une recette sur l’infrastructure cible."
+    ],
+    "table": [
+      [
+        "Domaine",
+        "Ce qui est présent"
+      ],
+      [
+        "Identité",
+        "Adaptateur OIDC/PKCE, introspection et realm Keycloak avec mot de passe + OTP"
+      ],
+      [
+        "Autorisation",
+        "Rôles, habilitation expirante, compartiments, département et droit nominatif"
+      ],
+      [
+        "Documents",
+        "PDF/texte UTF-8, taille bornée, scan bloquant, métadonnées filtrées et remise contrôlée"
+      ],
+      [
+        "Chiffrement",
+        "AES-256-GCM, clé de données par document, enveloppe et référence de clé"
+      ],
+      [
+        "Demandes",
+        "Justification, décision du propriétaire éligible, durée, refus et révocation API"
+      ],
+      [
+        "Journal",
+        "Événements SQL pour les parcours documentaires et décisions"
+      ],
+      [
+        "Interface",
+        "Tableau de bord, recherche, filtres, consultation, demandes et informations d’administration"
+      ],
+      [
+        "Mobilité",
+        "Web responsive, thèmes, effets sonores réglables et PWA installable"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Périmètre cible et fonctions à compléter",
+    "lead": "La cible est plus large que le prototype : les écarts sont identifiés, pas masqués.",
+    "paragraphs": [
+      "Le cahier de référence prévoit quinze domaines : identité, utilisateurs, classification, documents, chiffrement, autorisations, demandes, tableau de bord, audit, surveillance, consultation, rétention, sauvegardes, rapports et administration.",
+      "Plusieurs de ces domaines disposent d’un socle ou d’une vue partielle. Les opérations avancées ci-dessous restent à réaliser ou à valider avant une exploitation institutionnelle."
+    ],
+    "table": [
+      [
+        "Domaine",
+        "Complément identifié"
+      ],
+      [
+        "Identité et comptes",
+        "WebAuthn/FIDO2, sessions, revues de droits et hiérarchie normalisée"
+      ],
+      [
+        "Documents et classement",
+        "Versions multiples, quarantaine durable, reclassification approuvée et S3 privé"
+      ],
+      [
+        "Surveillance",
+        "SIEM, alertes, incidents, affectations et investigation"
+      ],
+      [
+        "Archives et rétention",
+        "Calendriers, conservation légale, archivage et suppression approuvée"
+      ],
+      [
+        "Sauvegardes",
+        "Jobs chiffrés, suivi, vérification de restauration et exercices"
+      ],
+      [
+        "Rapports",
+        "Exports autorisés et rapports opérationnels complets"
+      ],
+      [
+        "Administration",
+        "Console de changements sensibles, double contrôle et configuration gouvernée"
+      ],
+      [
+        "Clients et exploitation",
+        "Clients natifs, notifications, durcissement et supervision de production"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": "La normalisation complète des rôles, départements et classifications, ainsi que l’historique multiversion, ne sont pas présentés comme livrés."
+  },
+  {
+    "title": "Un parcours documentaire de bout en bout",
+    "lead": "Un circuit explicite, du dépôt autorisé à la remise réautorisée du contenu.",
+    "paragraphs": [
+      "Le déposant choisit un titre, une classification et des compartiments, puis introduit un fichier PDF ou texte UTF-8. Le serveur impose des limites avant l’analyse de la requête et vérifie les règles applicables au déposant.",
+      "L’analyse antivirus précède la publication. Un contenu accepté est chiffré et associé à des métadonnées et à une autorisation initiale temporaire. La consultation déclenche une nouvelle évaluation de l’accès avant le déchiffrement et la remise.",
+      "Si un autre lecteur satisfait aux attributs requis, il peut demander un accès nominatif en fournissant une justification. Une approbation ne remplace jamais l’habilitation, les compartiments ou la validité de session."
+    ],
+    "table": null,
+    "bullets": [],
+    "screen": null,
+    "diagram": "journey",
+    "callout": "Un fichier refusé ou un scanner indisponible ne crée pas de document consultable. La version actuelle ne conserve pas une quarantaine durable."
+  },
+  {
+    "title": "Pourquoi une habilitation seule ne suffit pas",
+    "lead": "Le besoin d’en connaître est matérialisé par un droit nominatif et temporaire.",
+    "paragraphs": [
+      "Le modèle combine RBAC et ABAC : le rôle détermine les opérations possibles ; les attributs et le document déterminent si une opération donnée doit être autorisée. La règle par défaut est le refus.",
+      "La lecture exige un compte actif, une habilitation non expirée au moins égale au niveau du document, tous les compartiments, le département correspondant et une autorisation nominative valide. Le document doit aussi être dans un état consultable et non expiré.",
+      "La décision d’accès est réservée au propriétaire éligible possédant le rôle approver. L’auto-approbation est interdite. Un identifiant UUID est un repère technique, pas une capacité de lecture."
+    ],
+    "table": [
+      [
+        "Contrôle",
+        "Question vérifiée par le serveur"
+      ],
+      [
+        "Identité et session",
+        "Le sujet est-il actif, provisionné et reconnu par l’identité ?"
+      ],
+      [
+        "Rôle",
+        "L’opération demandée est-elle permise ?"
+      ],
+      [
+        "Habilitation",
+        "Le niveau et la période de validité conviennent-ils ?"
+      ],
+      [
+        "Compartiments / département",
+        "Le périmètre du document correspond-il à celui de l’utilisateur ?"
+      ],
+      [
+        "Besoin d’en connaître",
+        "Existe-t-il un droit nominatif non expiré ?"
+      ],
+      [
+        "État du document",
+        "Le document est-il publié et non expiré ?"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Protection cryptographique et garde des clés",
+    "lead": "Authentifier le contenu chiffré et séparer les clés de données des clés de garde.",
+    "paragraphs": [
+      "Le contenu est chiffré avec AES-256-GCM par une bibliothèque éprouvée. Chaque document reçoit une clé de données et un nonce générés aléatoirement. Son identité est liée au contenu et à l’enveloppe par des données associées authentifiées.",
+      "La base conserve le nonce, la clé de données enveloppée et une référence de clé, pas une clé maîtresse en clair. Le fournisseur local est réservé au développement. Hors development, le code exige un fournisseur externe configuré.",
+      "Un adaptateur AWS KMS existe comme intégration technique à valider. Le choix d’un KMS/HSM approuvé, sa localisation, ses droits et les procédures de récupération restent une décision institutionnelle. Cet adaptateur ne constitue pas, à lui seul, une garantie de souveraineté."
+    ],
+    "table": null,
+    "bullets": [],
+    "screen": null,
+    "diagram": "encryption",
+    "callout": "Le serveur autorisé peut déchiffrer pour remettre le contenu. Ce modèle est un chiffrement du stockage avec enveloppe ; il ne doit pas être présenté comme du chiffrement de bout en bout."
+  },
+  {
+    "title": "Architecture générale",
+    "lead": "Une interface publique de démonstration et un futur déploiement documentaire distinct.",
+    "paragraphs": [
+      "Le frontend React communique avec une API FastAPI. L’API interroge l’identité, applique la politique, consulte PostgreSQL et orchestre l’antivirus, le chiffrement et le stockage. Le journal fait partie du périmètre de traçabilité.",
+      "GitHub Pages héberge uniquement les fichiers statiques de la démonstration. Le backend Python, PostgreSQL et Keycloak nécessitent un hébergement séparé et autorisé. Le Compose livré est une aide au développement local, pas un modèle de production prêt à exposer."
+    ],
+    "table": null,
+    "bullets": [],
+    "screen": null,
+    "diagram": "architecture",
+    "callout": "La vue ci-dessus exprime les responsabilités du système. Les flux, certificats, droits d’exploitation et intégrations réelles restent à vérifier sur l’environnement retenu."
+  },
+  {
+    "title": "Choix techniques et modèle de données",
+    "lead": "Un monorepo qui rassemble le produit, les politiques, les tests et les livrables.",
+    "paragraphs": [
+      "Le socle utilise Python, FastAPI, Pydantic, SQLAlchemy et Alembic avec PostgreSQL. Le client utilise React, TypeScript, Vite et Tailwind, complétés par les styles institutionnels. L’identité est déléguée à Keycloak.",
+      "Le modèle livré comprend utilisateurs, documents, version initiale, autorisations nominatives, demandes et journal. Les métadonnées portent notamment propriétaire, département, classification, compartiments et dates.",
+      "Les rôles et compartiments sont encore des tableaux JSON administrés hors API. La première version est unique par document. Une normalisation plus complète et des historiques métiers sont des travaux identifiés pour la suite."
+    ],
+    "table": [
+      [
+        "Couche",
+        "Mise en œuvre actuelle"
+      ],
+      [
+        "Interface",
+        "React / TypeScript / Vite / Tailwind / PWA"
+      ],
+      [
+        "API et validation",
+        "FastAPI / Pydantic"
+      ],
+      [
+        "Données et migrations",
+        "SQLAlchemy / Alembic / PostgreSQL"
+      ],
+      [
+        "Identité",
+        "Keycloak / OpenID Connect / PKCE / OTP"
+      ],
+      [
+        "Fichiers et analyse",
+        "Objets locaux chiffrés / ClamAV INSTREAM"
+      ],
+      [
+        "Cryptographie",
+        "AES-GCM / enveloppe / fournisseur local et adaptateur KMS"
+      ],
+      [
+        "Qualité et publication",
+        "Tests Python et Node / workflows GitHub / Pages"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Une interface démontrable et compréhensible",
+    "lead": "La présentation du produit s’appuie sur des écrans réels et des données synthétiques.",
+    "paragraphs": [
+      "Le tableau de bord donne une vue du périmètre visible. Le répertoire permet la recherche et le filtre de classification. La consultation affiche un bandeau et un filigrane nominatif ; les demandes sont justifiées et soumises à décision.",
+      "L’interface conserve une identité cohérente : emblème fourni, menu bleu nuit, accents or, thème aube minérale et mode sombre. Les messages et sons accompagnent l’action, sans fabriquer une réussite opérationnelle dans la démonstration."
+    ],
+    "table": null,
+    "bullets": [],
+    "screen": "04-tableau-de-bord",
+    "diagram": null,
+    "callout": "Capture réelle du prototype. Les compteurs, documents et événements montrés dans la démo sont fictifs et ne constituent pas des métriques institutionnelles."
+  },
+  {
+    "title": "Documents, classification et traçabilité",
+    "lead": "Rendre visibles les marques utiles sans divulguer le catalogue non autorisé.",
+    "paragraphs": [
+      "Les cinq niveaux proposés sont NON CLASSIFIÉ, RESTREINT, CONFIDENTIEL, SECRET et TRÈS SECRET. Leur validation institutionnelle reste nécessaire. Même au premier niveau, les règles de diffusion du système continuent à s’appliquer.",
+      "La liste transmise par le serveur contient seulement les documents autorisés. La consultation et le téléchargement réévaluent les droits. Un filigrane peut aider la traçabilité, mais ne peut empêcher toutes les captures d’écran ou photographies.",
+      "Les événements d’accès et de décision sont enregistrés en SQL. Une table SQL n’est pas un stockage inviolable : collecte externe append-only, séparation des comptes et procédures d’investigation sont à mettre en place avant exploitation."
+    ],
+    "table": null,
+    "bullets": [],
+    "screen": "06-documents",
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Mobilité et application installable",
+    "lead": "Une expérience adaptée à l’ordinateur, à la tablette et au téléphone.",
+    "paragraphs": [
+      "La version web adapte sa navigation et sa typographie aux petits écrans. Le menu devient un tiroir, les documents deviennent des cartes et l’en-tête institutionnel reste visible pendant le défilement.",
+      "Le manifeste et le service worker permettent l’installation comme application autonome lorsque le navigateur le prend en charge. L’icône reprend l’emblème avec un badge SSDC. Le shell statique et la démonstration peuvent fonctionner hors connexion après leur chargement initial.",
+      "Les tokens, documents protégés et réponses API ne sont pas mis en cache. La connexion au serveur et à l’identité reste indispensable aux opérations institutionnelles. Les clients Electron/Flutter ne sont pas livrés dans cette tranche."
+    ],
+    "table": null,
+    "bullets": [],
+    "screen": "23-mobile-connexion",
+    "diagram": null,
+    "callout": "La compatibilité et les modalités d’installation varient selon le navigateur et le système. Une recette sur les appareils cibles demeure nécessaire."
+  },
+  {
+    "title": "Qualité, tests et résultat du contrôle de sécurité",
+    "lead": "Des preuves reproductibles, avec un périmètre et des limites explicites.",
+    "paragraphs": [
+      "Le dernier état vérifié comporte 28 tests backend et 7 tests frontend. Ils couvrent notamment les refus d’accès, l’expiration, l’auto-approbation interdite, la révocation, l’intégrité cryptographique, le scan bloquant, le cache PWA et les effets sonores. Le build et les workflows de publication ont réussi.",
+      "Le scan approfondi finalisé porte sur l’instantané associé à la révision 905ef89. Il a rapporté un constat de consommation de ressources avant authentification : des corps multipart ou JSON pouvaient être analysés avant la vérification des limites applicatives. Le correctif ultérieur compte les octets reçus en amont de l’analyse, indépendamment de la taille déclarée.",
+      "Les tests reproduisaient le défaut avant correction puis vérifient le refus HTTP 413 après correction, y compris sans Content-Length ou avec une longueur sous-déclarée. Le dépôt autorisé d’un fichier à la limite reste accepté. Le rapport historique n’est pas un nouvel audit complet de la version livrée."
+    ],
+    "table": [
+      [
+        "Preuve",
+        "Portée / limite"
+      ],
+      [
+        "28 tests backend",
+        "Contrôles applicatifs ; certaines intégrations sont remplacées en test"
+      ],
+      [
+        "7 tests frontend",
+        "PWA et audio ; ne remplacent pas tous les tests sur appareils"
+      ],
+      [
+        "7 largeurs vérifiées",
+        "320, 360, 390, 430, 768, 1024 et 1440 px"
+      ],
+      [
+        "Audit approfondi",
+        "Ancien instantané ; dépendances et intégrations partiellement examinées"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": "Keycloak, ClamAV, KMS et PostgreSQL en conditions réelles restent à exercer. Aucun test, audit ou choix graphique ne vaut certification ou accréditation du système."
+  },
+  {
+    "title": "Gouvernance, souveraineté et conditions d’exploitation",
+    "lead": "La confiance dépend autant de l’organisation que du logiciel.",
+    "paragraphs": [
+      "Une exploitation réelle doit encadrer la création et la désactivation des comptes, la durée des habilitations, les revues de droits, la classification, les décisions et les procédures d’urgence. Les administrateurs, approbateurs et auditeurs doivent disposer de responsabilités définies.",
+      "L’autorité compétente devra arrêter les lieux d’hébergement, la garde des clés, les accès d’exploitation, la rétention, la sauvegarde et les conditions de récupération. Les choix doivent être compatibles avec les exigences institutionnelles validées.",
+      "L’environnement cible devra également traiter TLS, reverse proxy, limitations de débit, quotas de stockage, durcissement, surveillance, séparation des droits en base et journal externe. Aucune connexion à une infrastructure réelle n’est présumée acquise."
+    ],
+    "table": [
+      [
+        "Décision de gouvernance",
+        "Question à trancher"
+      ],
+      [
+        "Propriété et pilotage",
+        "Qui porte, valide et arbitre le périmètre ?"
+      ],
+      [
+        "Données et classification",
+        "Quelles catégories peuvent entrer dans le pilote ?"
+      ],
+      [
+        "Identité et habilitations",
+        "Qui approuve, attribue, revoit et révoque les droits ?"
+      ],
+      [
+        "Clés et récupération",
+        "Qui détient l’autorité et comment restaurer l’accès ?"
+      ],
+      [
+        "Continuité",
+        "Quelle perte admissible et quel délai de reprise sont acceptés ?"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Feuille de route proposée",
+    "lead": "Progresser par étapes assorties de preuves et de décisions de passage.",
+    "paragraphs": [
+      "La trajectoire ci-dessous est une proposition de méthode, pas un calendrier contractuel. Les durées et charges doivent être estimées après cadrage, disponibilité des équipes et connaissance de l’infrastructure.",
+      "Le pilote doit rester isolé et utiliser des données fictives jusqu’à décision formelle sur l’introduction d’autres données. Chaque passage d’étape doit être fondé sur des critères documentés plutôt que sur une simple démonstration visuelle."
+    ],
+    "table": [
+      [
+        "Étape",
+        "Livrable / condition de passage"
+      ],
+      [
+        "1. Cadrage",
+        "Sponsor, périmètre, règles de classification, rôles, critères de recette"
+      ],
+      [
+        "2. Intégration",
+        "Identité réelle et MFA, base, antivirus, stockage et KMS approuvés"
+      ],
+      [
+        "3. Durcissement",
+        "TLS, quotas, collecte de logs, revues de droits, tests négatifs et concurrence"
+      ],
+      [
+        "4. Continuité",
+        "Sauvegardes chiffrées, restauration exercée, objectifs de reprise définis"
+      ],
+      [
+        "5. Pilote",
+        "Scénarios métier exécutés, retours utilisateurs, anomalies traitées"
+      ],
+      [
+        "6. Décision d’exploitation",
+        "Validation institutionnelle, procédures, formation et supervision opérationnelle"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": "Les archives, rapports complets, incidents, versions multiples et fonctions avancées seront priorisés selon les besoins validés ; ils ne sont pas supposés déjà disponibles."
+  },
+  {
+    "title": "Ressources et méthode de chiffrage",
+    "lead": "Un budget crédible suppose une volumétrie, des exigences et un périmètre connus.",
+    "paragraphs": [
+      "Le projet nécessite des compétences métier, développement, données, identité, sécurité, exploitation et recette. Les rôles peuvent être combinés selon l’organisation, tout en préservant les séparations de responsabilités utiles.",
+      "Les postes à chiffrer comprennent l’hébergement, le stockage, l’identité, la garde des clés, les sauvegardes, la supervision, les intégrations, le durcissement, la formation et le maintien en condition. Aucun montant fictif n’est proposé dans ce dossier.",
+      "Avant d’établir un budget, il faut connaître le nombre de comptes, les accès simultanés, le volume documentaire, la croissance, les durées de conservation, le niveau de disponibilité et les objectifs de restauration. La limite actuelle de 10 Mio par fichier ne constitue pas une étude de capacité globale."
+    ],
+    "table": [
+      [
+        "Entrée de cadrage",
+        "Effet sur les ressources"
+      ],
+      [
+        "Utilisateurs / concurrence",
+        "Dimensionnement de l’API, de la base et de l’identité"
+      ],
+      [
+        "Volume / croissance / versions",
+        "Stockage principal et sauvegardes"
+      ],
+      [
+        "Rétention et conservation légale",
+        "Capacité, procédures et coûts de maintien"
+      ],
+      [
+        "Exigences de reprise",
+        "Redondance, outillage et exercices"
+      ],
+      [
+        "Modèle de garde des clés",
+        "Intégration KMS/HSM, exploitation et récupération"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Risques et critères d’acceptation",
+    "lead": "Transformer les limites connues en exigences de recette vérifiables.",
+    "paragraphs": [
+      "Le risque principal d’une présentation réussie serait de confondre prototype et système exploitable. Les limites connues doivent donc devenir des critères explicites de validation, avec des responsables et des preuves.",
+      "La disparition d’un secret de garde peut rendre des contenus irrécupérables ; une sauvegarde non restaurée ne prouve pas la reprise. De même, un journal SQL ne prouve pas l’immutabilité, et une marque visuelle ne remplace pas une autorisation."
+    ],
+    "table": [
+      [
+        "Risque / écart",
+        "Critère d’acceptation proposé"
+      ],
+      [
+        "Droit trop large ou expiré",
+        "Refus vérifié sur liste, métadonnées, contenu et API"
+      ],
+      [
+        "Flux d’identité faible",
+        "MFA, récupération et voies alternatives testés sur l’IdP cible"
+      ],
+      [
+        "Clé ou sauvegarde indisponible",
+        "Récupération autorisée et restauration exercées"
+      ],
+      [
+        "Épuisement de ressources",
+        "Limites effectives, quotas et tests de charge du périmètre"
+      ],
+      [
+        "Traçabilité modifiable",
+        "Séparation des droits et collecte externe validées"
+      ],
+      [
+        "Évolution non maîtrisée",
+        "Migrations, tests, revue et retour arrière documentés"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": "La recette devra couvrir les parcours légitimes et les refus attendus. L’absence d’anomalie dans une démonstration n’est pas une preuve exhaustive."
+  },
+  {
+    "title": "Déroulé conseillé pour la présentation de lundi",
+    "lead": "Un fil conducteur court, appuyé par le dossier et une démonstration honnête.",
+    "paragraphs": [
+      "Le déroulé proposé dure environ douze minutes et peut être adapté au temps disponible. Le dossier sert de support détaillé ; la démonstration doit rester centrée sur quelques parcours compréhensibles.",
+      "Avant la séance, vérifier l’accès au site, garder les deux PDF en copie locale et préparer uniquement des données fictives. Les parcours qui exigent un backend et Keycloak réels doivent être expliqués sans simuler une réussite institutionnelle."
+    ],
+    "table": [
+      [
+        "Temps indicatif",
+        "Message / démonstration"
+      ],
+      [
+        "1 min",
+        "Présenter le besoin et la vision de gouvernance documentaire"
+      ],
+      [
+        "2 min",
+        "Expliquer identité, habilitation, compartiments et besoin d’en connaître"
+      ],
+      [
+        "4 min",
+        "Montrer accueil, tableau de bord, recherche, consultation et formulaire de demande"
+      ],
+      [
+        "2 min",
+        "Présenter les preuves de test, le correctif et les limites"
+      ],
+      [
+        "2 min",
+        "Expliquer la feuille de route et les conditions du pilote"
+      ],
+      [
+        "1 min",
+        "Formuler la décision de cadrage recherchée"
+      ]
+    ],
+    "bullets": [
+      "Phrase d’ouverture : « Le SSDC-RDC propose un cadre de gestion documentaire où chaque accès doit être justifié, autorisé et traçable. »",
+      "Phrase de conclusion : « Nous disposons d’un prototype vérifiable ; l’étape suivante consiste à valider un périmètre de pilote et ses exigences institutionnelles. »"
+    ],
+    "screen": null,
+    "diagram": null,
+    "callout": null
+  },
+  {
+    "title": "Décisions proposées et prochaines actions",
+    "lead": "Faire de la présentation un point de départ pour un cadrage structuré.",
+    "paragraphs": [
+      "L’objectif immédiat est de recueillir un intérêt formalisé pour l’étude et de désigner les interlocuteurs aptes à valider les règles métier et techniques. Il ne s’agit pas de solliciter un raccordement non préparé à des systèmes sensibles.",
+      "Les prochaines actions proposées sont : définir le sponsor et les référents, organiser un atelier de classification et de droits, identifier le périmètre du pilote, puis établir un plan d’intégration et une grille de recette.",
+      "Le projet sera plus crédible si ses engagements restent proportionnés aux preuves disponibles. L’initiative portée par LOKALA LOMBOTO Jonathan peut ainsi évoluer d’un prototype démontrable vers une solution institutionnelle, sous réserve des validations et moyens nécessaires."
+    ],
+    "table": [
+      [
+        "Décision attendue",
+        "Résultat concret"
+      ],
+      [
+        "Valider l’intérêt de l’étude",
+        "Un mandat de cadrage et des interlocuteurs identifiés"
+      ],
+      [
+        "Définir le pilote",
+        "Un périmètre isolé et des données autorisées pour l’exercice"
+      ],
+      [
+        "Valider les exigences",
+        "Des règles, scénarios et critères de sortie écrits"
+      ],
+      [
+        "Établir les moyens",
+        "Un chiffrage et un plan d’intégration fondés sur les besoins"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": "Initiateur et propriétaire du projet : LOKALA LOMBOTO Jonathan."
+  },
+  {
+    "title": "Questions fréquentes et ressources",
+    "lead": "Les réponses essentielles pour une discussion de décision.",
+    "paragraphs": [
+      "Le projet est-il déjà officiel ou accrédité ? Non. Il s’agit d’une proposition et d’un prototype. Le dossier et l’emblème ne confèrent pas une autorisation institutionnelle.",
+      "Le site public stocke-t-il des documents classifiés ? Non. GitHub Pages sert l’interface de démonstration et les PDF publics ; le serveur documentaire et l’identité nécessitent un hébergement séparé.",
+      "Peut-on tout utiliser hors connexion ? Le shell et la démo peuvent être disponibles après chargement ; les opérations institutionnelles dépendent du serveur et de la session.",
+      "Que reste-t-il à décider ? Le périmètre métier, la gouvernance, les intégrations, la garde des clés, les objectifs de service, le budget et la validation d’exploitation.",
+      "Pour approfondir : le manuel utilisateur de 35 pages explique les parcours et erreurs ; la documentation du dépôt précise architecture, état de livraison, exploitation, identité et PWA. Les captures de ce dossier proviennent de ce même prototype sur données fictives."
+    ],
+    "table": [
+      [
+        "Ressource publique",
+        "Accès"
+      ],
+      [
+        "Démonstration",
+        "https://propheticpowerfulman.github.io/ssdc/"
+      ],
+      [
+        "Manuel utilisateur",
+        "Lien « Manuel utilisateur (PDF) » sur l’accueil"
+      ],
+      [
+        "Dossier de présentation",
+        "Lien « Présentation du projet (PDF) » sur l’accueil"
+      ]
+    ],
+    "bullets": [],
+    "screen": null,
+    "diagram": null,
+    "callout": "Dossier préparé le 31 octobre 2026 pour la présentation du lundi 2 novembre 2026. Initiateur et propriétaire : LOKALA LOMBOTO Jonathan."
+  }
+]

@@ -171,6 +171,16 @@ export default function LoginPage({
       <footer className="login-footer">
         <a
           href={
+            import.meta.env.BASE_URL +
+            "presentation/Presentation_projet_SSDC-RDC.pdf"
+          }
+          target="_blank"
+          rel="noreferrer"
+        >
+          Présentation du projet (PDF)
+        </a>
+        <a
+          href={
             import.meta.env.BASE_URL + "manual/Manuel_utilisateur_SSDC-RDC.pdf"
           }
           target="_blank"
