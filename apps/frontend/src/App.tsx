@@ -1,3 +1,4 @@
+import ProjectDownloads from "./components/ProjectDownloads";
 import SoundSettings from "./components/SoundSettings";
 import InstallApp from "./components/InstallApp";
 import { useEffect, useState } from "react";
@@ -657,6 +658,7 @@ export default function App({ startupError = "" }: { startupError?: string }) {
           </div>
         </header>
         <main id="main">
+          <ProjectDownloads />
           <div className="breadcrumb">
             Espace institutionnel <ChevronRight size={13} /> <span>{page}</span>
           </div>

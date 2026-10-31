@@ -1,3 +1,4 @@
+import ProjectDownloads from "../components/ProjectDownloads";
 import SoundSettings from "../components/SoundSettings";
 import InstallApp from "../components/InstallApp";
 import {
@@ -55,6 +56,7 @@ export default function LoginPage({
           </button>
         </div>
       </div>
+      <ProjectDownloads />
       <div className="login-layout">
         <section className="login-story" aria-labelledby="login-mission">
           <span className="login-overline">
@@ -169,25 +171,6 @@ export default function LoginPage({
         </section>
       </div>
       <footer className="login-footer">
-        <a
-          href={
-            import.meta.env.BASE_URL +
-            "presentation/Presentation_projet_SSDC-RDC.pdf"
-          }
-          target="_blank"
-          rel="noreferrer"
-        >
-          Présentation du projet (PDF)
-        </a>
-        <a
-          href={
-            import.meta.env.BASE_URL + "manual/Manuel_utilisateur_SSDC-RDC.pdf"
-          }
-          target="_blank"
-          rel="noreferrer"
-        >
-          Manuel utilisateur (PDF)
-        </a>
         <span>DANTIC · Division Bases de données</span>
         <span>
           SSDC-RDC © 2026 · <span>Conception : LOKALA LOMBOTO Jonathan</span>
