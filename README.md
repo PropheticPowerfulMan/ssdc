@@ -50,3 +50,6 @@ Les tests couvrent les refus d’accès, l’IDOR, l’expiration, le refus d’
 Voir [architecture](docs/architecture.md), [matrice de livraison](docs/delivery-status.md), [sécurité et exploitation](docs/operations.md) et [sources techniques](docs/references.md).
 
 GitHub Pages ne peut héberger ni Python, ni PostgreSQL, ni Keycloak. Le workflow Pages publie exclusivement `apps/frontend/dist` avec `VITE_DEMO_MODE=true`. Pour un déploiement institutionnel, héberger séparément le backend et l’identité sur une infrastructure autorisée, configurer TLS et les variables `VITE_*`, désactiver la démonstration et faire valider la politique et les intégrations. Le Compose livré est destiné au développement local.
+
+## Interface et installation
+Connexion institutionnelle centrée sur l’emblème fourni, thème clair blanc cassé, menu repliable, en-tête sticky et effets sonores désactivables. Voir [inventaire des interactions](docs/interaction-sounds.md). La version publiée propose une [installation PWA et un shell hors connexion](docs/pwa.md), sans cache de documents ni de réponses API.

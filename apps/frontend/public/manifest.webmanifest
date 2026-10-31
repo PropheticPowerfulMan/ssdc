@@ -1,0 +1,35 @@
+{
+  "id": "./",
+  "name": "SSDC — République Démocratique du Congo",
+  "short_name": "SSDC RDC",
+  "description": "Plateforme documentaire SSDC-RDC — proposition institutionnelle, non accréditée.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#061A35",
+  "theme_color": "#061A35",
+  "orientation": "any",
+  "categories": [
+    "productivity",
+    "business"
+  ],
+  "icons": [
+    {
+      "src": "icons/ssdc-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/ssdc-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

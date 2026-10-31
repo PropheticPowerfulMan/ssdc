@@ -1,3 +1,5 @@
+import SoundSettings from "./components/SoundSettings";
+import InstallApp from "./components/InstallApp";
 import { useEffect, useState } from "react";
 import {
   ShieldCheck,
@@ -26,14 +28,24 @@ import {
   Eye,
   FolderLock,
   ExternalLink,
+  Volume2,
+  VolumeX,
+  PanelLeftClose,
 } from "lucide-react";
-import { api, content, demo, identity } from "./services/api";
+import { api, content, demo, identity, connect } from "./services/api";
 import {
   documents as samples,
   events as sampleEvents,
   levels,
   type Document,
 } from "./demo";
+import {
+  playSound,
+  soundsEnabled,
+  setSoundsEnabled,
+  type Sound,
+} from "./services/sounds";
+import LoginPage from "./pages/LoginPage";
 type Event = { action: string; allowed: boolean; created_at: string };
 type Access = {
   id: string;
@@ -65,7 +77,29 @@ function Badge({ level }: { level: number }) {
     </span>
   );
 }
-export default function App() {
+export default function App({ startupError = "" }: { startupError?: string }) {
+  const [entered, setEntered] = useState(!demo && !!identity.authenticated);
+  const [loginBusy, setLoginBusy] = useState(false);
+  const [loginError, setLoginError] = useState(startupError);
+  async function enter() {
+    playSound("loginStart");
+    if (demo) {
+      setEntered(true);
+      return;
+    }
+    setLoginBusy(true);
+    setLoginError("");
+    try {
+      if (await connect()) setEntered(true);
+    } catch {
+      setLoginError(
+        "Connexion indisponible. Vérifiez le service d’identité puis rechargez la page.",
+      );
+      playSound("error");
+    } finally {
+      setLoginBusy(false);
+    }
+  }
   const [page, setPage] = useState("Tableau de bord"),
     [docs, setDocs] = useState<Document[]>(demo ? samples : []),
     [events, setEvents] = useState<Event[]>(demo ? sampleEvents : []),
@@ -78,10 +112,74 @@ export default function App() {
     [upload, setUpload] = useState(false),
     [busy, setBusy] = useState(!demo),
     [mobile, setMobile] = useState(false),
+    [collapsed, setCollapsed] = useState(false),
+    [compact, setCompact] = useState(
+      () => window.matchMedia("(max-width: 1023px)").matches,
+    ),
+    [sound, setSound] = useState(soundsEnabled),
     [dark, setDark] = useState(false),
     [name, setName] = useState(demo ? "Agent de démonstration" : ""),
     [roles, setRoles] = useState<string[]>([]);
-  const notify = (message: string) => setNotice(message);
+  const notify = (message: string, cue: Sound = "notification") => {
+    setNotice(message);
+    playSound(cue);
+  };
+  function toggleMenu() {
+    const opening = compact ? !mobile : collapsed;
+    playSound(opening ? "menuOpen" : "menuClose");
+    if (compact) setMobile(!mobile);
+    else setCollapsed(!collapsed);
+  }
+  function closeMenu() {
+    if (mobile) playSound("menuClose");
+    setMobile(false);
+  }
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 1023px)");
+    const update = () => {
+      setCompact(media.matches);
+      setMobile(false);
+    };
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+  useEffect(() => {
+    if (!compact || !mobile) return;
+    const previous = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const drawer = document.getElementById("main-navigation");
+    drawer?.querySelector<HTMLButtonElement>(".drawer-close")?.focus();
+    const trap = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+      const items = Array.from(
+        drawer?.querySelectorAll<HTMLElement>("button,a[href]") ?? [],
+      );
+      if (e.shiftKey && document.activeElement === items[0]) {
+        e.preventDefault();
+        items.at(-1)?.focus();
+      } else if (!e.shiftKey && document.activeElement === items.at(-1)) {
+        e.preventDefault();
+        items[0]?.focus();
+      }
+    };
+    document.addEventListener("keydown", trap);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", trap);
+      previous?.focus();
+    };
+  }, [compact, mobile]);
+  useEffect(() => {
+    if (!search) return;
+    const timer = setTimeout(() => playSound("search"), 350);
+    return () => clearTimeout(timer);
+  }, [search]);
+  useEffect(() => {
+    const changed = () => setSound(soundsEnabled());
+    window.addEventListener("ssdc-sounds-change", changed);
+    return () => window.removeEventListener("ssdc-sounds-change", changed);
+  }, []);
   async function refresh() {
     setBusy(true);
     try {
@@ -92,14 +190,14 @@ export default function App() {
       setRequests(await api<Access[]>("/access-requests"));
       if (me.roles.includes("auditor")) setEvents(await api<Event[]>("/audit"));
     } catch (e) {
-      notify((e as Error).message);
+      notify((e as Error).message, "error");
     } finally {
       setBusy(false);
     }
   }
   useEffect(() => {
-    if (!demo) void refresh();
-  }, []);
+    if (!demo && entered) void refresh();
+  }, [entered]);
   useEffect(() => {
     if (!notice) return;
     const id = setTimeout(() => setNotice(""), 6000);
@@ -111,6 +209,8 @@ export default function App() {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        if (viewer || upload) playSound("close");
+        else if (mobile) playSound("menuClose");
         setViewer(null);
         setUpload(false);
         setMobile(false);
@@ -118,7 +218,7 @@ export default function App() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [viewer, upload, mobile]);
   useEffect(() => {
     if (!viewer && !upload) return;
     const previous = document.activeElement as HTMLElement | null;
@@ -160,6 +260,7 @@ export default function App() {
         "EXERCICE DE DÉMONSTRATION\n\nCe document est entièrement fictif. Il illustre le parcours de consultation du SSDC-RDC.\n\nAucune information institutionnelle réelle n’est présente sur cette page publique.",
       );
       setViewer(doc);
+      playSound("viewerOpen");
       return;
     }
     try {
@@ -167,18 +268,23 @@ export default function App() {
       if (blob.type.startsWith("text/plain")) {
         setPreview(await blob.text());
         setViewer(doc);
+        playSound("viewerOpen");
       } else {
         notify("PDF disponible par téléchargement contrôlé.");
         setViewer(doc);
+        playSound("viewerOpen");
       }
     } catch (e) {
-      notify((e as Error).message);
+      notify((e as Error).message, "error");
     }
   }
   async function download() {
     if (!viewer) return;
     if (demo) {
-      notify("Téléchargement désactivé dans la démonstration publique.");
+      notify(
+        "Téléchargement désactivé dans la démonstration publique.",
+        "blocked",
+      );
       return;
     }
     try {
@@ -189,9 +295,10 @@ export default function App() {
       a.download =
         "document" + (blob.type === "application/pdf" ? ".pdf" : ".txt");
       a.click();
+      playSound("download");
       setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (e) {
-      notify((e as Error).message);
+      notify((e as Error).message, "error");
     }
   }
   async function submitUpload(e: React.FormEvent<HTMLFormElement>) {
@@ -199,18 +306,20 @@ export default function App() {
     if (demo) {
       notify(
         "Le dépôt nécessite le backend institutionnel. Aucun fichier n’a été envoyé.",
+        "blocked",
       );
       return;
     }
     const form = new FormData(e.currentTarget);
+    playSound("uploadStart");
     setBusy(true);
     try {
       await api("/documents", { method: "POST", body: form });
       setUpload(false);
-      notify("Document analysé, chiffré et enregistré.");
+      notify("Document analysé, chiffré et enregistré.", "uploadSuccess");
       await refresh();
     } catch (e) {
-      notify((e as Error).message);
+      notify((e as Error).message, "error");
     } finally {
       setBusy(false);
     }
@@ -218,10 +327,14 @@ export default function App() {
   async function requestAccess(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (demo) {
-      notify("Les demandes réelles nécessitent une session Keycloak.");
+      notify(
+        "Les demandes réelles nécessitent une session Keycloak.",
+        "blocked",
+      );
       return;
     }
     const form = new FormData(e.currentTarget);
+    playSound("requestStart");
     try {
       await api("/access-requests", {
         method: "POST",
@@ -231,10 +344,10 @@ export default function App() {
           justification: form.get("justification"),
         }),
       });
-      notify("Demande enregistrée.");
+      notify("Demande enregistrée.", "requestSuccess");
       await refresh();
     } catch (e) {
-      notify((e as Error).message);
+      notify((e as Error).message, "error");
     }
   }
   async function decide(id: string, approve: boolean) {
@@ -245,9 +358,9 @@ export default function App() {
         body: JSON.stringify({ approve, hours: 24 }),
       });
       await refresh();
-      notify("Décision enregistrée.");
+      notify("Décision enregistrée.", approve ? "approve" : "reject");
     } catch (e) {
-      notify((e as Error).message);
+      notify((e as Error).message, "error");
     }
   }
   const documentTable = (
@@ -281,13 +394,13 @@ export default function App() {
                   </span>
                 </button>
               </td>
-              <td>
+              <td data-label="Classification">
                 <Badge level={d.classification} />
               </td>
-              <td className="date">
+              <td className="date" data-label="Modifié le">
                 {new Date(d.created_at).toLocaleDateString("fr-FR")}
               </td>
-              <td>
+              <td data-label="Statut">
                 <span className="status">
                   <i />
                   Disponible
@@ -313,13 +426,63 @@ export default function App() {
       )}
     </div>
   );
+  if (!entered)
+    return (
+      <LoginPage
+        onEnter={() => void enter()}
+        busy={loginBusy}
+        error={loginError}
+        sound={sound}
+        onSound={() => {
+          const next = !sound;
+          setSound(next);
+          setSoundsEnabled(next);
+          if (next) playSound("soundOn");
+        }}
+        dark={dark}
+        onTheme={() => {
+          playSound("theme");
+          setDark(!dark);
+        }}
+      />
+    );
   return (
-    <div className="app">
+    <div
+      className={"app " + (collapsed ? "menu-collapsed" : "")}
+      onClickCapture={(event) => {
+        const control = (event.target as Element).closest<HTMLElement>(
+          "button,a",
+        );
+        if (!control || control.dataset.sound === "none") return;
+        const cue = control.dataset.sound as Sound | undefined;
+        if (cue) playSound(cue);
+        else if (control.tagName === "A") playSound("external");
+      }}
+      onChangeCapture={(event) => {
+        const input = event.target as HTMLInputElement;
+        if (input.type === "file" && input.files?.length) playSound("file");
+        else if (input.tagName === "SELECT") playSound("filter");
+      }}
+    >
       <a className="skip" href="#main">
         Aller au contenu
       </a>
-      {mobile && <div className="scrim" onClick={() => setMobile(false)} />}
-      <aside className={"sidebar " + (mobile ? "opened" : "")}>
+      {compact && mobile && (
+        <div className="scrim" onClick={closeMenu} aria-hidden="true" />
+      )}
+      <aside
+        id="main-navigation"
+        className={"sidebar " + (mobile ? "opened" : "")}
+        inert={compact && !mobile}
+        aria-label="Menu principal"
+      >
+        <button
+          className="icon-button drawer-close"
+          aria-label="Fermer le menu"
+          onClick={closeMenu}
+        >
+          <X size={18} />
+        </button>
         <div className="brand">
           <img
             src={import.meta.env.BASE_URL + "assets/embleme-rdc.jpeg"}
@@ -338,6 +501,10 @@ export default function App() {
           {navigation.map((n) => (
             <button
               key={n.name}
+              title={n.name}
+              aria-label={n.name}
+              aria-current={page === n.name ? "page" : undefined}
+              data-sound="navigation"
               className={page === n.name ? "nav-item active" : "nav-item"}
               onClick={() => {
                 setPage(n.name);
@@ -359,6 +526,8 @@ export default function App() {
           ))}
         </nav>
         <div className="sidebar-bottom">
+          <SoundSettings />
+          <InstallApp />
           <div className="shield-box">
             <ShieldCheck size={25} />
             <b>
@@ -392,20 +561,47 @@ export default function App() {
           </div>
         </div>
       </aside>
-      <div className="shell">
+      <div className="shell" inert={compact && mobile}>
         <header className="topbar">
           <button
-            className="icon-button mobile-menu"
-            aria-label="Ouvrir le menu"
-            onClick={() => setMobile(true)}
+            className="icon-button menu-toggle"
+            aria-label={
+              (compact ? mobile : !collapsed)
+                ? "Replier le menu"
+                : "Ouvrir le menu"
+            }
+            aria-controls="main-navigation"
+            aria-expanded={compact ? mobile : !collapsed}
+            onClick={toggleMenu}
           >
-            <Menu />
+            {!compact && !collapsed ? (
+              <PanelLeftClose size={20} />
+            ) : (
+              <Menu size={20} />
+            )}
           </button>
           <div className="institution">
             <span>RÉPUBLIQUE DÉMOCRATIQUE DU CONGO</span>
             <b>Secrétariat Général près le Président de la République</b>
+            <span className="header-location">
+              SSDC <ChevronRight size={10} /> {page}
+            </span>
           </div>
           <div className="top-actions">
+            <button
+              className="icon-button sound-toggle"
+              aria-label={sound ? "Couper les sons" : "Activer les sons"}
+              aria-pressed={sound}
+              title={sound ? "Couper les sons" : "Activer les sons"}
+              onClick={() => {
+                const next = !sound;
+                setSound(next);
+                setSoundsEnabled(next);
+                if (next) playSound("soundOn");
+              }}
+            >
+              {sound ? <Volume2 size={18} /> : <VolumeX size={18} />}
+            </button>
             <span className="environment">
               <i />
               {demo ? "DÉMONSTRATION" : "CONNECTÉ"}
@@ -413,6 +609,7 @@ export default function App() {
             <button
               className="icon-button"
               aria-label="Changer le thème"
+              data-sound="theme"
               onClick={() => setDark(!dark)}
             >
               {dark ? <Sun size={18} /> : <Moon size={18} />}
@@ -438,15 +635,29 @@ export default function App() {
                 {demo ? "Visiteur · données fictives" : "Compte institutionnel"}
               </small>
             </div>
-            {!demo && (
+            {
               <button
                 className="icon-button"
                 aria-label="Déconnexion"
-                onClick={() => void identity.logout()}
+                data-sound="logout"
+                onClick={() => {
+                  if (demo) {
+                    setEntered(false);
+                    setPage("Tableau de bord");
+                    setMobile(false);
+                    setSearch("");
+                    setViewer(null);
+                    setUpload(false);
+                  } else
+                    void identity.logout({
+                      redirectUri:
+                        window.location.origin + import.meta.env.BASE_URL,
+                    });
+                }}
               >
                 <LogOut size={17} />
               </button>
-            )}
+            }
           </div>
         </header>
         <main id="main">
@@ -463,7 +674,11 @@ export default function App() {
                   : "Gérez les informations dans le respect du besoin d’en connaître."}
               </p>
             </div>
-            <button className="primary" onClick={() => setUpload(true)}>
+            <button
+              className="primary"
+              data-sound="uploadOpen"
+              onClick={() => setUpload(true)}
+            >
               <Plus size={18} />
               Déposer un document
             </button>
@@ -508,7 +723,10 @@ export default function App() {
                         <br />
                         Un patrimoine documentaire sous contrôle.
                       </p>
-                      <button onClick={() => setPage("Documents")}>
+                      <button
+                        data-sound="navigation"
+                        onClick={() => setPage("Documents")}
+                      >
                         Accéder aux documents <ArrowUpRight size={16} />
                       </button>
                     </div>
@@ -638,7 +856,10 @@ export default function App() {
                     <section className="panel activity-panel">
                       <div className="panel-heading">
                         <h3>Activités récentes</h3>
-                        <button onClick={() => setPage("Journal d’audit")}>
+                        <button
+                          data-sound="navigation"
+                          onClick={() => setPage("Journal d’audit")}
+                        >
                           Tout voir <ArrowUpRight size={14} />
                         </button>
                       </div>
@@ -696,7 +917,10 @@ export default function App() {
                           Votre espace documentaire, selon vos autorisations.
                         </p>
                       </div>
-                      <button onClick={() => setPage("Documents")}>
+                      <button
+                        data-sound="navigation"
+                        onClick={() => setPage("Documents")}
+                      >
                         Tous les documents <ArrowUpRight size={15} />
                       </button>
                     </div>
@@ -710,6 +934,7 @@ export default function App() {
                     <label className="search">
                       <Search size={18} />
                       <input
+                        aria-label="Rechercher un document"
                         placeholder="Rechercher un document…"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
@@ -898,6 +1123,7 @@ export default function App() {
           {notice}
           <button
             aria-label="Fermer la notification"
+            data-sound="close"
             onClick={() => setNotice("")}
           >
             <X size={16} />
@@ -918,6 +1144,7 @@ export default function App() {
                 autoFocus
                 className="icon-button"
                 aria-label="Fermer la consultation"
+                data-sound="close"
                 onClick={() => setViewer(null)}
               >
                 <X />
@@ -960,6 +1187,7 @@ export default function App() {
               <button
                 className="icon-button"
                 aria-label="Fermer le formulaire"
+                data-sound="close"
                 onClick={() => setUpload(false)}
               >
                 <X />

@@ -5,11 +5,16 @@ export const identity = new Keycloak({
   realm: "ssdc",
   clientId: "ssdc-web",
 });
-export async function connect() {
-  const authenticated = await identity.init({
+let initialization: Promise<boolean> | undefined;
+export function initializeIdentity() {
+  initialization ??= identity.init({
     pkceMethod: "S256",
     checkLoginIframe: false,
   });
+  return initialization;
+}
+export async function connect() {
+  const authenticated = await initializeIdentity();
   if (!authenticated)
     await identity.login({ acr: { essential: true, values: ["2"] } });
   return authenticated;

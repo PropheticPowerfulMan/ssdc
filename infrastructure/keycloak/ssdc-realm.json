@@ -101,5 +101,12 @@
       "directAccessGrantsEnabled": false,
       "serviceAccountsEnabled": false
     }
-  ]
+  ],
+  "permanentLockout": false,
+  "failureFactor": 3,
+  "waitIncrementSeconds": 300,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 300,
+  "quickLoginCheckMilliSeconds": 0,
+  "maxDeltaTimeSeconds": 3600
 }
