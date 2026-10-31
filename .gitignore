@@ -13,3 +13,6 @@ var/
 *.log
 coverage/
 *.db
+
+tmp/
+output/

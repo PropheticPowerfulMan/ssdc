@@ -2953,3 +2953,216 @@ textarea {
   font-size: 10px;
   line-height: 1.7;
 }
+
+/* Aube minérale: cool pearl surfaces, naval header, bronze accents. */
+:root:not([data-theme="dark"]) {
+  --background: #d7e1e7;
+  --surface: #e7eef1;
+  --text: #17334c;
+  --muted: #4d667c;
+  --border: #bccdd7;
+  --scroll-track: #d1dee5;
+  --scroll-thumb: #55758c;
+  --scroll-hover: #a68850;
+  background: var(--background);
+  color: var(--text);
+}
+:root:not([data-theme="dark"]) .shell {
+  background: linear-gradient(145deg, #dce6eb, #d0dde5);
+}
+:root:not([data-theme="dark"]) .topbar {
+  background: linear-gradient(110deg, #0b2542, #173b58);
+  border-bottom: 2px solid #b69a64;
+  box-shadow: 0 4px 20px #08223b16;
+}
+:root:not([data-theme="dark"]) .institution span {
+  color: #bacbdc;
+}
+:root:not([data-theme="dark"]) .institution b {
+  color: #edf3f6;
+}
+:root:not([data-theme="dark"]) .institution .header-location {
+  color: #e0c48b;
+}
+:root:not([data-theme="dark"]) .topbar .icon-button {
+  color: #c8d8e5;
+}
+:root:not([data-theme="dark"]) .topbar .icon-button:hover {
+  background: #ffffff12;
+}
+:root:not([data-theme="dark"]) .topbar .account {
+  color: #e5eef4;
+}
+:root:not([data-theme="dark"]) .topbar .account small {
+  color: #adbed0;
+}
+:root:not([data-theme="dark"]) .topbar .avatar {
+  background: #294c68;
+  border-color: #547189;
+  color: #e6cc96;
+}
+:root:not([data-theme="dark"]) .topbar .environment {
+  background: #31594f;
+  color: #c9e5d8;
+}
+:root:not([data-theme="dark"]) .panel,
+:root:not([data-theme="dark"]) .stats article {
+  background: linear-gradient(150deg, #e9eff2, #e0e9ee);
+  border-color: #b7cbd7;
+  box-shadow: 0 4px 14px #173a5510;
+}
+:root:not([data-theme="dark"]) .stats article {
+  border-top: 2px solid #9ab0bf;
+}
+:root:not([data-theme="dark"]) .demo-strip {
+  background: #cbdbe5;
+  border-color: #b1c5d3;
+  color: #415e76;
+}
+:root:not([data-theme="dark"]) .demo-strip b {
+  color: #244962;
+}
+:root:not([data-theme="dark"]) .document-name small,
+:root:not([data-theme="dark"]) .panel-subtitle,
+:root:not([data-theme="dark"]) .stats small,
+:root:not([data-theme="dark"]) .date {
+  color: #536e83;
+}
+:root:not([data-theme="dark"]) th {
+  background: #cedde6;
+  color: #3d5e76;
+  border-color: #b6cbd8;
+}
+:root:not([data-theme="dark"]) tbody tr:hover {
+  background: #cbdde75c;
+}
+:root:not([data-theme="dark"]) .file-icon {
+  background: #d1e0ea;
+  border-color: #b7cddd;
+  color: #3a678a;
+}
+:root:not([data-theme="dark"]) input,
+:root:not([data-theme="dark"]) select,
+:root:not([data-theme="dark"]) textarea {
+  background: #e0e9ef;
+  border-color: #aebfcb;
+}
+:root:not([data-theme="dark"]) .donut > div {
+  background: #e5edf1;
+  border-color: #e5edf1;
+}
+:root:not([data-theme="dark"]) .breadcrumb {
+  color: #5c768b;
+}
+:root:not([data-theme="dark"]) .eyebrow {
+  color: #627e91;
+}
+:root:not([data-theme="dark"]) .login-card {
+  background: linear-gradient(145deg, #e8eef1, #d8e3ea);
+  border-color: #bba16e;
+}
+:root:not([data-theme="dark"]) .login-auth-info {
+  background: #cadbe6;
+  border-color: #adc3d2;
+}
+:root:not([data-theme="dark"]) .modal {
+  background: linear-gradient(145deg, #e7eef2, #dce6ec);
+}
+:root:not([data-theme="dark"]) .panel-note {
+  color: #536f82;
+}
+:root:not([data-theme="dark"]) footer {
+  color: #526d80;
+}
+:root:not([data-theme="dark"]) .login-footer {
+  color: #adc0d2;
+}
+
+.project-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-size: 9px;
+  color: inherit;
+}
+@media (max-width: 760px) {
+  .page-heading h1 {
+    font-size: 20px;
+  }
+  .page-heading p {
+    font-size: 10px;
+    line-height: 1.55;
+  }
+  .welcome h2 {
+    font-size: clamp(19px, 4.5vw, 23px);
+  }
+  .welcome p,
+  .welcome button {
+    font-size: 10px;
+  }
+  .panel-heading h3,
+  .policy-list h3 {
+    font-size: 12px;
+  }
+  .panel-subtitle,
+  .documents-panel .panel-subtitle {
+    font-size: 9px;
+  }
+  .document-name {
+    font-size: 11px;
+  }
+  .document-name small {
+    font-size: 9px;
+  }
+  .demo-strip {
+    font-size: 9px;
+    padding: 9px;
+  }
+  .project-info {
+    display: none;
+  }
+  .timeline-item b {
+    font-size: 10px;
+  }
+  .policy-list > p,
+  .policy-list article p {
+    font-size: 10.5px;
+  }
+  .login-card h2 {
+    font-size: 18px;
+  }
+  .login-story h1 {
+    font-size: clamp(20px, 5vw, 25px);
+  }
+  .login-description,
+  .login-enter {
+    font-size: 10px;
+  }
+  .login-card {
+    padding: 22px 18px 18px;
+  }
+  .login-mode,
+  .login-lockout,
+  .login-disclaimer,
+  .login-details summary {
+    font-size: 9px;
+  }
+}
+@media (max-width: 359px) {
+  .page-heading h1 {
+    font-size: 19px;
+  }
+  .login-card h2 {
+    font-size: 17px;
+  }
+  .login-story h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .shell {
+    transition: none;
+  }
+}

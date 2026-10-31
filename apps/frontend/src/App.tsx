@@ -180,6 +180,9 @@ export default function App({ startupError = "" }: { startupError?: string }) {
     window.addEventListener("ssdc-sounds-change", changed);
     return () => window.removeEventListener("ssdc-sounds-change", changed);
   }, []);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [page, entered]);
   async function refresh() {
     setBusy(true);
     try {
@@ -547,14 +550,7 @@ export default function App({ startupError = "" }: { startupError?: string }) {
                 : "SESSION INSTITUTIONNELLE"}
             </span>
           </div>
-          <a
-            className="repo-link"
-            href="https://github.com/PropheticPowerfulMan/ssdc"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Dépôt du projet <ExternalLink size={14} />
-          </a>
+
           <div className="sidebar-foot">
             DANTIC · Division Bases de données
             <small>SSDC-RDC © 2026 · Version 0.1</small>
@@ -690,13 +686,16 @@ export default function App({ startupError = "" }: { startupError?: string }) {
                 <b>Prototype institutionnel.</b> Données entièrement fictives ·
                 Aucun système officiel connecté.
               </span>
-              <a
-                href="https://github.com/PropheticPowerfulMan/ssdc"
-                target="_blank"
-                rel="noreferrer"
+              <button
+                className="project-info"
+                onClick={() =>
+                  notify(
+                    "SSDC-RDC : projet proposé, non accrédité. Concepteur et propriétaire : LOKALA LOMBOTO Jonathan.",
+                  )
+                }
               >
-                À propos du projet <ArrowUpRight size={14} />
-              </a>
+                À propos du projet <ShieldCheck size={14} />
+              </button>
             </div>
           )}
           {busy ? (

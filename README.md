@@ -53,3 +53,8 @@ GitHub Pages ne peut héberger ni Python, ni PostgreSQL, ni Keycloak. Le workflo
 
 ## Interface et installation
 Connexion institutionnelle centrée sur l’emblème fourni, thème clair blanc cassé, menu repliable, en-tête sticky et effets sonores désactivables. Voir [inventaire des interactions](docs/interaction-sounds.md). La version publiée propose une [installation PWA et un shell hors connexion](docs/pwa.md), sans cache de documents ni de réponses API.
+
+## Conception et propriété du projet
+Concepteur et propriétaire du projet et du manuel utilisateur : **LOKALA LOMBOTO Jonathan**. Le projet reste une proposition non accréditée ; la présence de l’emblème fourni n’implique pas d’agrément institutionnel.
+
+Le manuel utilisateur illustré, rédigé en français et signé au nom de LOKALA LOMBOTO Jonathan comme concepteur et propriétaire, est distribué depuis `apps/frontend/public/manual/Manuel_utilisateur_SSDC-RDC.pdf`. Ses sources et captures réelles se trouvent dans `docs/manual/`.

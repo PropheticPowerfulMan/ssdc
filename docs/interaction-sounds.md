@@ -39,7 +39,7 @@ Les champs ordinaires ne sonnent pas à chaque caractère. Les sons de réussite
 
 À partir de 1024 px : panneau latéral réductible en rail d’icônes. Sous 1024 px : tiroir avec bouton de fermeture, fond extérieur, Échap, verrouillage du défilement et gestion du focus clavier. Sous 600 px : documents sous forme de cartes, sans débordement horizontal du tableau. Sous 360 px : espacements, titres et illustration plus compacts. Formulaires à 16 px sur téléphone pour limiter le zoom automatique iOS. Prise en compte des zones sûres et des hauteurs de fenêtre dynamiques.
 
-Le thème clair utilise un fond bleu-gris doux `#eaf0f3` et des surfaces blanc cassé `#f4f6f5` ; le thème sombre reste disponible. Les tailles CSS sont fluides ; une compatibilité absolue avec tous les téléphones et versions de navigateurs n’est pas garantie.
+Le thème clair « aube minérale » utilise un fond gris-bleu `#d7e1e7`, des surfaces nacrées `#e7eef1`, un en-tête bleu nuit et des accents bronze ; le thème sombre reste disponible. Les tailles CSS sont fluides ; une compatibilité absolue avec tous les téléphones et versions de navigateurs n’est pas garantie.
 
 La page de connexion est la porte d’entrée initiale, avec emblème fourni et identification institutionnelle. La démonstration permet une exploration sans identifiants ; la configuration réelle utilise uniquement Keycloak (aucun mot de passe collecté par React). Le bouton de déconnexion permet de revenir à l’accueil dans la démo.
 

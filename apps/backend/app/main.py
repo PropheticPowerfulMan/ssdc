@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select, func, text
 from sqlalchemy.orm import Session
 from app.config import settings
+from app.body_limit import RequestBodyLimitMiddleware
 from app.db import database
 from app.models import User, Document, Version, Grant, AccessRequest, AuditEvent, now, uid
 from app.identity import current_user
@@ -28,6 +29,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="SSDC-RDC — proposition institutionnelle", version="0.1.0", lifespan=lifespan)
+app.add_middleware(RequestBodyLimitMiddleware, max_bytes=settings().max_upload_bytes + 64 * 1024)
 app.add_middleware(CORSMiddleware, allow_origins=[settings().frontend_origin],
                    allow_methods=["GET", "POST"], allow_headers=["Authorization", "Content-Type"])
 

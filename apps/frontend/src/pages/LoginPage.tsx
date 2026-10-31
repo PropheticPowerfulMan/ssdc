@@ -34,15 +34,9 @@ export default function LoginPage({
   return (
     <main className="login-page">
       <div className="login-top">
-        <a
-          className="login-wordmark"
-          href="https://github.com/PropheticPowerfulMan/ssdc"
-          onClick={() => playSound("external")}
-          target="_blank"
-          rel="noreferrer"
-        >
+        <span className="login-wordmark">
           SSDC <span>RDC</span>
-        </a>
+        </span>
         <div className="login-controls">
           <button
             className="icon-button"
@@ -175,17 +169,18 @@ export default function LoginPage({
         </section>
       </div>
       <footer className="login-footer">
+        <a
+          href={
+            import.meta.env.BASE_URL + "manual/Manuel_utilisateur_SSDC-RDC.pdf"
+          }
+          target="_blank"
+          rel="noreferrer"
+        >
+          Manuel utilisateur (PDF)
+        </a>
         <span>DANTIC · Division Bases de données</span>
         <span>
-          SSDC-RDC © 2026 ·{" "}
-          <a
-            href="https://github.com/PropheticPowerfulMan/ssdc"
-            onClick={() => playSound("external")}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Code source <ExternalLink size={11} />
-          </a>
+          SSDC-RDC © 2026 · <span>Conception : LOKALA LOMBOTO Jonathan</span>
         </span>
       </footer>
     </main>

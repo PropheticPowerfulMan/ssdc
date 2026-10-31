@@ -1,0 +1,465 @@
+[
+  {
+    "title": "Lire ce manuel et identifier votre environnement",
+    "screen": null,
+    "paragraphs": [
+      "Ce manuel décrit la version 0.1.0 du SSDC-RDC : Système de Sécurité des Données Classifiées. Il s’adresse aux utilisateurs, propriétaires de documents, approbateurs et opérateurs autorisés.",
+      "La version publique sur GitHub Pages est une démonstration. Ses documents, compteurs et événements sont fictifs. Elle ne collecte pas de mot de passe et n’est reliée à aucun système officiel. Une version institutionnelle exige le backend FastAPI, PostgreSQL, Keycloak, un antivirus et une gestion de clés configurés.",
+      "Les captures de ce document proviennent de l’application réellement exécutée dans un navigateur isolé. Elles illustrent les fonctions disponibles et les messages réels de la démonstration. Les parcours dépendant de services non déployés sont expliqués comme tels, sans fausse capture de réussite."
+    ],
+    "steps": [],
+    "note": "Projet proposé, non accrédité. L’emblème fourni et la présentation institutionnelle ne constituent ni une certification ni un agrément gouvernemental."
+  },
+  {
+    "title": "Accéder à l’application et à la démonstration",
+    "screen": "01-connexion-clair",
+    "paragraphs": [
+      "La page d’accueil place l’emblème de la RDC au centre de l’identité visuelle. Elle présente le nom du système, l’organisme de rattachement et le contexte de connexion.",
+      "Sur la démonstration publique, le bouton « Explorer la démonstration » ouvre les écrans fictifs sans demander d’identifiants.",
+      "Adresse publique : https://propheticpowerfulman.github.io/ssdc/ . Le lien Manuel utilisateur (PDF), présent sur l’accueil, permet de retrouver ce document."
+    ],
+    "steps": [
+      "Ouvrir l’adresse de l’application dans un navigateur à jour.",
+      "Vérifier le bandeau indiquant le caractère fictif de la démonstration.",
+      "Choisir « Explorer la démonstration ».",
+      "Pour revenir à l’accueil, utiliser le bouton de déconnexion de l’en-tête."
+    ],
+    "note": null
+  },
+  {
+    "title": "Connexion institutionnelle, MFA et échecs",
+    "screen": null,
+    "paragraphs": [
+      "En mode institutionnel, « Se connecter avec Keycloak » redirige vers le fournisseur d’identité. Le mot de passe et le second facteur sont saisis chez Keycloak, jamais dans un second formulaire de mot de passe React.",
+      "L’utilisateur doit posséder un compte actif et provisionné, une session reconnue et une habilitation valide. Une identité Keycloak seule ne crée pas automatiquement les droits documentaires.",
+      "La politique proposée bloque temporairement la connexion après 3 échecs : première attente de 5 minutes, prolongation possible par séries de nouveaux échecs, plafond de 15 minutes. Le compteur est réinitialisé après une période d’inactivité d’une heure."
+    ],
+    "steps": [
+      "Utiliser le bouton de connexion institutionnelle.",
+      "Saisir l’identifiant et le mot de passe dans Keycloak.",
+      "Terminer l’enrôlement ou saisir le code du second facteur demandé.",
+      "En cas de blocage, attendre la durée indiquée par l’identité ou contacter l’opérateur habilité."
+    ],
+    "note": "Le seuil 3/5 minutes est un choix du projet, pas une obligation universelle NIST. L’import du realm ne modifie pas automatiquement une installation Keycloak déjà existante. Le parcours réel doit être validé sur le serveur cible."
+  },
+  {
+    "title": "Comprendre les rôles et le besoin d’en connaître",
+    "screen": null,
+    "paragraphs": [
+      "Le serveur refuse l’accès par défaut. Le rôle de lecture ne suffit pas : il faut une habilitation non expirée d’un niveau suffisant, tous les compartiments du document, le département correspondant et une autorisation nominative non expirée.",
+      "Le document doit aussi être publié, non archivé et non expiré. Ces contrôles s’appliquent à la liste, aux métadonnées et au contenu. Un identifiant de document ne constitue jamais une autorisation.",
+      "Rôles de la version : reader pour lire, uploader pour déposer, approver pour décider en tant que propriétaire éligible, auditor pour le journal et admin pour les tâches techniques. Un administrateur ne reçoit aucun droit implicite sur le contenu."
+    ],
+    "steps": [],
+    "note": "Même un document NON CLASSIFIÉ reste soumis aux règles de diffusion de cette version. Une habilitation TRÈS SECRET ne donne pas automatiquement accès à tous les dossiers."
+  },
+  {
+    "title": "Se repérer et utiliser la navigation",
+    "screen": "04-tableau-de-bord",
+    "paragraphs": [
+      "L’en-tête institutionnel reste visible pendant le défilement et indique la rubrique active. Le menu latéral donne accès au tableau de bord, aux documents, aux classifications, aux demandes, au journal et à l’administration.",
+      "Le thème aube minérale associe des surfaces gris-bleu nacrées à un en-tête bleu nuit. Le bouton soleil/lune change uniquement l’apparence, sans modifier les droits."
+    ],
+    "steps": [
+      "Choisir une rubrique dans le menu.",
+      "Sur ordinateur, replier le menu en rail d’icônes pour agrandir l’espace de travail.",
+      "Sur tablette ou téléphone, ouvrir le tiroir avec le bouton menu.",
+      "Fermer le tiroir avec la croix, le fond extérieur ou la touche Échap."
+    ],
+    "note": null
+  },
+  {
+    "title": "Lire le tableau de bord",
+    "screen": "04-tableau-de-bord",
+    "paragraphs": [
+      "Les indicateurs concernent le périmètre accessible : nombre de documents visibles, documents classifiés, demandes en attente et état présenté par la version courante.",
+      "Le graphique regroupe les documents visibles par classification. Les activités récentes sont des événements fictifs dans la démo et des événements autorisés lorsque le serveur et le rôle auditeur le permettent.",
+      "Les sessions actives, sauvegardes et systèmes non intégrés ne disposent pas de valeurs opérationnelles inventées. Le tableau de bord ne constitue pas une console de supervision complète."
+    ],
+    "steps": [
+      "Lire d’abord le contexte de démonstration ou de session.",
+      "Ouvrir « Tous les documents » pour consulter le répertoire.",
+      "Choisir « Tout voir » dans les activités pour ouvrir le journal."
+    ],
+    "note": null
+  },
+  {
+    "title": "Replier le menu sur ordinateur",
+    "screen": "05-menu-replie",
+    "paragraphs": [
+      "Le menu réduit conserve les icônes de navigation et leurs libellés accessibles. Cette présentation libère la largeur centrale et facilite la consultation des tableaux.",
+      "Le bouton situé dans l’en-tête permet de restaurer le menu complet. Le repli et l’ouverture sont accompagnés de deux effets sonores distincts lorsque l’audio est activé."
+    ],
+    "steps": [
+      "Cliquer sur « Replier le menu ».",
+      "Survoler une icône pour identifier sa rubrique.",
+      "Choisir « Ouvrir le menu » pour retrouver les intitulés et les réglages de bas de menu."
+    ],
+    "note": null
+  },
+  {
+    "title": "Consulter le répertoire documentaire",
+    "screen": "06-documents",
+    "paragraphs": [
+      "La rubrique Documents présente le titre, la classification, la date et le statut de chaque document autorisé. Le serveur filtre la liste avant de transmettre les métadonnées.",
+      "Les identifiants techniques de stockage, les clés enveloppées et les chemins des objets ne sont pas affichés. Sur téléphone, les lignes deviennent des cartes pour éviter un tableau trop large."
+    ],
+    "steps": [
+      "Ouvrir la rubrique Documents.",
+      "Repérer le titre et le niveau de classification.",
+      "Utiliser le titre ou l’icône œil pour ouvrir une consultation."
+    ],
+    "note": null
+  },
+  {
+    "title": "Rechercher et combiner les filtres",
+    "screen": "07-recherche",
+    "paragraphs": [
+      "La recherche porte sur les titres des documents déjà visibles dans votre périmètre. Elle est insensible à la casse et fonctionne conjointement avec le filtre de classification.",
+      "Le champ de recherche ne permet pas de découvrir un document que le serveur n’a pas autorisé."
+    ],
+    "steps": [
+      "Saisir un mot du titre, par exemple « continuité ».",
+      "Choisir éventuellement un niveau dans « Toutes les classifications ».",
+      "Effacer le texte et revenir à toutes les classifications pour rétablir la liste complète autorisée."
+    ],
+    "note": "Un résultat absent peut provenir du filtre, du texte saisi ou des règles d’accès. L’application ne révèle pas si un autre document protégé existe."
+  },
+  {
+    "title": "Comprendre une recherche sans résultat",
+    "screen": "08-recherche-vide",
+    "paragraphs": [
+      "Une liste vide n’est pas nécessairement une panne. Aucun titre visible ne correspond peut-être au texte ou au niveau sélectionné.",
+      "Dans une installation réelle, une habilitation ou une autorisation expirée peut aussi réduire le périmètre visible."
+    ],
+    "steps": [
+      "Effacer le champ de recherche.",
+      "Remettre le filtre sur toutes les classifications.",
+      "Si un document attendu reste absent, contacter son propriétaire ou l’opérateur sans partager de contenu sensible."
+    ],
+    "note": null
+  },
+  {
+    "title": "Filtrer par niveau de classification",
+    "screen": "09-filtre",
+    "paragraphs": [
+      "Le menu déroulant limite l’affichage au niveau sélectionné. Le filtre change la présentation de votre liste autorisée ; il ne modifie ni le document ni votre habilitation.",
+      "Les libellés NON CLASSIFIÉ, RESTREINT, CONFIDENTIEL, SECRET et TRÈS SECRET sont les niveaux proposés pour le projet."
+    ],
+    "steps": [
+      "Ouvrir le filtre de classification.",
+      "Sélectionner le niveau voulu.",
+      "Revenir à toutes les classifications pour annuler le filtre."
+    ],
+    "note": null
+  },
+  {
+    "title": "Ouvrir un document et lire les marques",
+    "screen": "10-consultation",
+    "paragraphs": [
+      "La consultation affiche le titre, le niveau de classification et un filigrane comportant le nom de l’utilisateur et la date de consultation. Dans la démo, le contenu est un texte synthétique clairement marqué.",
+      "En mode réel, le serveur réévalue les droits avant de déchiffrer le contenu. Une modification du contenu chiffré ou de son contexte doit provoquer un échec d’intégrité et un refus de remise du fichier."
+    ],
+    "steps": [
+      "Ouvrir le document depuis son titre ou l’icône œil.",
+      "Vérifier le bandeau et le filigrane avant toute utilisation.",
+      "Fermer la fenêtre avec la croix ou Échap."
+    ],
+    "note": "Le filigrane et les restrictions du navigateur ne peuvent pas empêcher totalement les captures d’écran ou les photographies. La version actuelle affiche le texte ; les PDF sont remis par téléchargement contrôlé."
+  },
+  {
+    "title": "Télécharger ou comprendre un refus",
+    "screen": "11-telechargement-demo",
+    "paragraphs": [
+      "Le bouton Télécharger est volontairement inactif pour les contenus fictifs de la démonstration. Un message précise cette limite ; aucun fichier sensible n’est transféré.",
+      "En mode institutionnel, une nouvelle demande de contenu est autorisée côté serveur avant le téléchargement. Le fichier remis au lecteur ne peut plus être rappelé par le navigateur après sa remise."
+    ],
+    "steps": [
+      "Choisir Télécharger depuis la consultation.",
+      "Lire le message affiché si l’opération est indisponible ou refusée.",
+      "Dans un déploiement réel, conserver le fichier uniquement dans l’environnement et selon la procédure autorisés."
+    ],
+    "note": "Une politique différenciant aperçu et téléchargement par document n’est pas encore livrée. La remise actuelle du contenu suit le droit de lecture."
+  },
+  {
+    "title": "Préparer et déposer un document",
+    "screen": "12-depot",
+    "paragraphs": [
+      "Le dépôt demande un titre de 3 à 200 caractères, une classification, des compartiments séparés par des virgules et un fichier. Les formats admis sont PDF et texte UTF-8, dans la limite de 10 Mio pour le fichier.",
+      "Le rôle uploader, le rôle reader et les attributs d’habilitation doivent permettre le classement choisi. Le serveur impose aussi une limite du corps HTTP avant l’analyse des fichiers multipart."
+    ],
+    "steps": [
+      "Choisir Déposer un document.",
+      "Renseigner le titre, la classification et les compartiments exacts.",
+      "Sélectionner un fichier non vide du format admis.",
+      "Dans une installation réelle, choisir Analyser et chiffrer et attendre le résultat."
+    ],
+    "note": "Le propriétaire reçoit à la création une autorisation initiale de 30 jours. La procédure de renouvellement de son propre droit après expiration doit être définie par l’opérateur ; l’auto-approbation n’est pas permise."
+  },
+  {
+    "title": "Dépôt fictif, validation et analyse antivirus",
+    "screen": "13-depot-demo",
+    "paragraphs": [
+      "Dans la démonstration, « Vérifier le parcours » confirme que le dépôt réel nécessite le backend. Le fichier choisi n’est pas envoyé.",
+      "En mode réel, une analyse antivirus bloquante précède la publication et le chiffrement du contenu. Si le scanner refuse le fichier ou n’est pas disponible, aucun document consultable n’est créé.",
+      "Un fichier vide, trop grand, non UTF-8 ou d’un type non admis est refusé. Un PDF doit présenter la signature attendue ; son type déclaré ne suffit pas."
+    ],
+    "steps": [
+      "Corriger les champs signalés par la validation du formulaire.",
+      "Pour un refus de format, choisir un PDF ou un texte UTF-8 conforme.",
+      "Pour une indisponibilité du scanner, demander le rétablissement du service avant de réessayer."
+    ],
+    "note": "Le projet ne dispose pas encore d’une quarantaine persistante ni d’un historique multiversion complet. Ne pas interpréter un refus comme une mise en quarantaine durable."
+  },
+  {
+    "title": "Comprendre les classifications proposées",
+    "screen": "14-classifications",
+    "paragraphs": [
+      "La rubrique Classification décrit les cinq niveaux proposés et le nombre de documents visibles pour chacun. Elle sert de repère ; elle n’est pas un écran permettant d’élever son habilitation.",
+      "Les compartiments limitent encore la diffusion à l’intérieur d’un même niveau. La correspondance du département et une autorisation nominative restent nécessaires."
+    ],
+    "steps": [
+      "Lire la description du niveau.",
+      "Vérifier la politique institutionnelle validée avant de classer un document réel.",
+      "Demander une reclassification par la procédure autorisée ; aucun circuit de reclassification approuvée n’est livré dans cette interface."
+    ],
+    "note": null
+  },
+  {
+    "title": "Demander un accès nominatif",
+    "screen": "15-demandes",
+    "paragraphs": [
+      "Le propriétaire communique l’identifiant UUID du document au demandeur. L’application n’expose pas de catalogue de documents non autorisés pour permettre de les découvrir.",
+      "La justification doit exprimer un besoin d’en connaître et contenir entre 20 et 2000 caractères. Le demandeur doit déjà satisfaire aux exigences d’habilitation, de compartiments et de département."
+    ],
+    "steps": [
+      "Ouvrir Demandes d’accès.",
+      "Saisir l’identifiant communiqué par le propriétaire.",
+      "Décrire précisément le besoin d’en connaître.",
+      "Transmettre la demande et consulter son état dans la liste visible."
+    ],
+    "note": null
+  },
+  {
+    "title": "Suivre une demande et comprendre les décisions",
+    "screen": "16-demande-demo",
+    "paragraphs": [
+      "La démo rappelle qu’une session Keycloak réelle est nécessaire pour enregistrer une demande. Aucun circuit d’approbation fictif n’est présenté comme opérationnel.",
+      "En mode réel, le demandeur voit ses demandes et l’approbateur éligible voit celles sur lesquelles il peut décider. Les états sont en attente, approuvée ou rejetée."
+    ],
+    "steps": [
+      "Vérifier l’identifiant et la justification avant envoi.",
+      "En cas de refus, contacter le propriétaire pour comprendre le périmètre autorisé.",
+      "Après approbation, revenir aux Documents : le serveur doit toujours confirmer les autres conditions d’accès."
+    ],
+    "note": "Une décision positive ne remplace ni l’habilitation ni les compartiments. Les notifications automatiques aux parties prenantes ne sont pas encore intégrées."
+  },
+  {
+    "title": "Approuver, refuser, expirer et révoquer un droit",
+    "screen": null,
+    "paragraphs": [
+      "Le serveur n’autorise la décision qu’au propriétaire du document possédant le rôle approver et les attributs requis. Il interdit l’auto-approbation. Un compte administrateur ne contourne pas ces exigences.",
+      "L’interface réelle propose une approbation de 24 heures ou un refus. L’API accepte une durée bornée de 1 à 720 heures. Une demande déjà traitée ne peut pas être décidée une seconde fois.",
+      "À l’expiration de l’autorisation, l’accès est de nouveau refusé. La révocation existe côté API pour l’approbateur autorisé ; aucun bouton de révocation n’est encore exposé dans cette interface."
+    ],
+    "steps": [
+      "Dans une installation réelle, ouvrir une demande en attente visible.",
+      "Vérifier le demandeur, le document et le besoin déclaré.",
+      "Choisir Approuver 24 h ou Refuser selon la procédure validée.",
+      "Si une révocation anticipée est nécessaire, solliciter l’opérateur habilité utilisant l’API prévue."
+    ],
+    "note": "Aucune capture de décision institutionnelle réelle n’est fournie : le backend et l’identité n’étaient pas déployés pour ces captures. Les contrôles d’auto-approbation et de révocation sont couverts par les tests API."
+  },
+  {
+    "title": "Lire le journal d’audit",
+    "screen": "17-audit",
+    "paragraphs": [
+      "La rubrique Journal d’audit présente l’action, le résultat autorisé ou refusé et l’horodatage. Les événements de la démonstration sont synthétiques.",
+      "En mode réel, le rôle auditor est exigé. La vue opérationnelle n’expose pas les identifiants des ressources protégées. Des événements sont enregistrés pour les listes, métadonnées, lectures, dépôts et décisions."
+    ],
+    "steps": [
+      "Ouvrir Journal d’audit.",
+      "Distinguer un accès autorisé d’une tentative refusée.",
+      "Pour une investigation réelle, suivre le circuit de signalement prévu ; ne pas exporter de données sensibles dans un canal public."
+    ],
+    "note": "Le journal SQL est modifiable par un opérateur disposant de droits suffisants sur la base. Il n’est pas inviolable ; une collecte externe append-only reste à intégrer."
+  },
+  {
+    "title": "Consulter les informations d’administration",
+    "screen": "18-administration",
+    "paragraphs": [
+      "Cet écran présente le statut proposé du projet, les principes d’identité et de chiffrement, le provisionnement et les fonctions non configurées.",
+      "Il ne permet pas de modifier une habilitation, une clé de chiffrement ou un secret depuis le navigateur. Les comptes et droits sont provisionnés par l’opérateur suivant une procédure contrôlée.",
+      "Le contenu documentaire est protégé par AES-256-GCM avec une clé de données par document et une enveloppe de clé. Le serveur autorisé peut déchiffrer pour remettre le contenu : ce fonctionnement ne doit pas être présenté comme du chiffrement de bout en bout."
+    ],
+    "steps": [],
+    "note": "Le fournisseur de clés local est réservé au développement. Un environnement autre que development nécessite un KMS externe configuré et validé."
+  },
+  {
+    "title": "Personnaliser le thème et les effets sonores",
+    "screen": "02-reglages-audio",
+    "paragraphs": [
+      "Le bouton soleil/lune bascule entre le thème aube minérale et le thème sombre. Les barres de défilement reprennent la palette de l’application.",
+      "Le panneau Sons & volume se trouve sur l’accueil et dans le menu complet. Le volume par défaut est 55 %. La préférence est mémorisée sur l’appareil lorsque le navigateur le permet."
+    ],
+    "steps": [
+      "Ouvrir Sons & volume.",
+      "Choisir Tester le son pour activer l’audio après un geste utilisateur.",
+      "Ajuster le curseur ou couper les effets.",
+      "Si le moteur est actif mais silencieux, vérifier aussi le volume de l’appareil et les permissions du navigateur."
+    ],
+    "note": "Un son ne constitue jamais une preuve de succès : lire aussi le message visuel. Aucun son de réussite ne simule un dépôt ou une décision réelle dans la démo."
+  },
+  {
+    "title": "Utiliser le thème sombre",
+    "screen": "19-mode-sombre",
+    "paragraphs": [
+      "Le thème sombre conserve l’identité bleu nuit, or et bleu Congo. Les mêmes rubriques, droits, formulaires et messages restent disponibles.",
+      "Le choix du thème n’a aucun effet sur la classification, la session ou les autorisations. Les fenêtres de consultation conservent leurs marques et leur filigrane."
+    ],
+    "steps": [
+      "Choisir le bouton de changement de thème.",
+      "Vérifier le contraste de votre écran dans vos conditions de travail.",
+      "Revenir au thème aube minérale avec le même bouton."
+    ],
+    "note": null
+  },
+  {
+    "title": "Travailler sur téléphone ou tablette",
+    "screen": "20-mobile-tableau",
+    "paragraphs": [
+      "Sous 1024 px, la navigation devient un tiroir. Sous 600 px, les documents sont présentés en cartes. Les titres et espacements sont réduits pour limiter l’encombrement.",
+      "L’en-tête reste visible et la zone centrale s’adapte à la largeur disponible. Les champs conservent une taille évitant le zoom automatique sur les navigateurs mobiles concernés."
+    ],
+    "steps": [
+      "Ouvrir le menu avec l’icône en haut à gauche.",
+      "Choisir une rubrique ; le tiroir se ferme après navigation.",
+      "Faire défiler la page ou le formulaire sans perdre l’identité institutionnelle.",
+      "Tourner l’appareil si une lecture plus large facilite la consultation."
+    ],
+    "note": "Les captures montrent des largeurs représentatives. Une compatibilité parfaite avec chaque téléphone et chaque version de navigateur ne peut pas être garantie sans recette sur ces appareils."
+  },
+  {
+    "title": "Ouvrir le tiroir et consulter les cartes",
+    "screen": "21-mobile-menu",
+    "paragraphs": [
+      "Le tiroir présente les mêmes rubriques que le menu de bureau. Son ouverture bloque le défilement de l’arrière-plan et garde le parcours clavier dans le menu.",
+      "La croix, le fond extérieur et Échap ferment le tiroir. Dans Documents, la carte regroupe le titre, la classification, la date, le statut et le bouton de consultation."
+    ],
+    "steps": [
+      "Ouvrir le tiroir puis choisir Documents.",
+      "Utiliser le titre ou l’icône œil d’une carte.",
+      "Refermer les fenêtres avec leur croix ou Échap sur un clavier."
+    ],
+    "note": null
+  },
+  {
+    "title": "Lire les cartes documentaires sur téléphone",
+    "screen": "22-mobile-documents",
+    "paragraphs": [
+      "Sur les petits écrans, les informations de chaque document sont regroupées dans une carte compacte. Le titre reste le point d’entrée de la consultation, avec une icône œil indépendante.",
+      "La recherche et le filtre de classification restent disponibles au-dessus des cartes. Les règles serveur sont identiques à celles de l’ordinateur."
+    ],
+    "steps": [
+      "Ouvrir Documents depuis le tiroir.",
+      "Rechercher un titre ou choisir un niveau.",
+      "Ouvrir une carte et vérifier la classification avant lecture."
+    ],
+    "note": null
+  },
+  {
+    "title": "Accueil mobile et tablette",
+    "screen": "23-mobile-connexion",
+    "extra_screen": "24-tablette-connexion",
+    "paragraphs": [
+      "L’emblème, l’identification institutionnelle et la commande d’entrée restent au centre de l’accueil sur téléphone et tablette. Les titres et espacements sont adaptés aux écrans étroits.",
+      "Les réglages sonores et l’aide à l’installation sont accessibles sous la zone de connexion. Faire défiler la page si la hauteur de l’appareil ne permet pas de tout afficher."
+    ],
+    "steps": [
+      "Utiliser le bouton d’entrée correspondant à votre environnement.",
+      "Faire défiler pour accéder aux réglages et à l’installation.",
+      "Changer l’orientation si cela facilite la lecture."
+    ],
+    "note": null
+  },
+  {
+    "title": "Installer la PWA et reconnaître son icône",
+    "screen": "03-installation",
+    "paragraphs": [
+      "L’application peut être installée dans une fenêtre autonome lorsque le navigateur le permet. L’icône reprend l’emblème fourni, avec un badge SSDC en bas à gauche pour distinguer ce projet. L’onglet du navigateur utilise l’emblème sans badge.",
+      "Le bouton Installer l’application déclenche le dialogue natif disponible ou affiche l’aide adaptée. Sur iPhone/iPad : Safari, Partager puis Sur l’écran d’accueil. Sur Android : menu du navigateur, Installer l’application. Sur ordinateur : commande d’installation de Chrome/Edge ou Ajouter au Dock dans Safari compatible."
+    ],
+    "steps": [
+      "Ouvrir l’application en HTTPS.",
+      "Utiliser la commande Installer l’application.",
+      "Confirmer personnellement le dialogue de votre appareil.",
+      "Lancer SSDC RDC depuis l’icône installée."
+    ],
+    "note": "Les dialogues système varient selon le navigateur et l’OS ; ils ne sont pas simulés dans les captures du manuel. L’installation sur chaque plateforme reste à valider sur les appareils cibles."
+  },
+  {
+    "title": "Hors connexion, mises à jour et déconnexion",
+    "screen": null,
+    "paragraphs": [
+      "Le service worker conserve les fichiers statiques publics de l’interface. La démonstration synthétique peut rester disponible hors connexion après son chargement initial réussi.",
+      "Les documents protégés, tokens, réponses API et décisions d’accès ne sont pas mis en cache. Les opérations institutionnelles exigent une connexion au serveur et à l’identité. Une première installation sans aucun accès réseau ne peut pas précharger l’interface.",
+      "Une nouvelle version disponible est proposée par Mettre à jour l’application. Cette action recharge l’interface : terminer ou abandonner explicitement un formulaire avant de l’utiliser."
+    ],
+    "steps": [
+      "Lire l’indicateur Hors connexion si le réseau est absent.",
+      "Rétablir le réseau avant toute opération institutionnelle.",
+      "Appliquer la mise à jour lorsque le travail non transmis est terminé.",
+      "Utiliser Déconnexion ; la démo revient à l’accueil, le mode réel délègue la fermeture de session à Keycloak."
+    ],
+    "note": null
+  },
+  {
+    "title": "Réagir aux messages et aux erreurs",
+    "screen": null,
+    "paragraphs": [
+      "Session invalide ou expirée : se reconnecter par le fournisseur d’identité. Ressource indisponible : ne pas conclure à son existence ; le serveur utilise un refus qui ne divulgue pas la ressource.",
+      "Conflit de décision : une demande peut avoir déjà été traitée. Erreur de validation : corriger le titre, l’UUID, la justification, la classification ou les compartiments.",
+      "Fichier trop grand ou vide : choisir un fichier conforme. Format refusé : PDF ou texte UTF-8 seulement. Scanner indisponible : attendre le rétablissement du service. Contenu indisponible : solliciter l’opérateur pour l’intégrité ou la gestion de clés."
+    ],
+    "steps": [
+      "Lire le message visuel complet, sans se fier uniquement au son.",
+      "Corriger une erreur de saisie puis réessayer une fois.",
+      "Pour un problème de session, de droit, d’antivirus ou de contenu, contacter l’autorité habilitée.",
+      "Ne jamais publier un document réel, mot de passe, token ou clé dans une issue publique."
+    ],
+    "note": "L’interface peut afficher un message générique de refus ou d’indisponibilité. Les codes HTTP techniques associés sont décrits dans l’annexe de ce manuel."
+  },
+  {
+    "title": "Fonctions livrées, limites et évolutions",
+    "screen": null,
+    "paragraphs": [
+      "Livré dans cette tranche : accès OIDC intégré, politique serveur, dépôt et chiffrement, lecture contrôlée, demandes et décisions, révocation API, journal SQL, client web responsive et PWA statique.",
+      "Non livré ou non validé en exploitation : console d’utilisateurs et de sessions, WebAuthn/FIDO2, reclassification approuvée, versions multiples, quarantaine durable, SIEM et incidents, archivage et rétention opérationnels, jobs de sauvegarde vérifiés, exports et rapports complets, notifications, clients Electron/Flutter.",
+      "Ces fonctions ne doivent pas être promises à un utilisateur comme déjà disponibles. La matrice de livraison du dépôt fait foi pour l’état courant. Ce manuel doit être révisé après chaque évolution du produit."
+    ],
+    "steps": [],
+    "note": "Le scan approfondi ne dispose pas encore d’un rapport final accessible à la date de rédaction. Les tests automatisés et un correctif ciblé ne constituent pas une certification de sécurité."
+  },
+  {
+    "title": "Annexe : accès, erreurs et cycle documentaire",
+    "screen": null,
+    "paragraphs": [
+      "Cycle livré : sélection du fichier, validation, analyse antivirus bloquante, chiffrement du contenu, stockage chiffré, attribution initiale de droit, consultation réautorisée et journalisation. Une demande peut ensuite créer un droit nominatif temporaire ; l’expiration ou la révocation retire cet accès.",
+      "Repères HTTP : 401/403 pour une session absente ou invalide selon la couche ; 404 pour une ressource indisponible ou un refus non divulguant ; 409 pour une décision déjà traitée ou une habilitation incompatible au moment d’approuver ; 413 pour un corps ou fichier trop volumineux ; 415 pour un format refusé ; 422 pour des champs invalides ou un scan refusé ; 503 pour un contenu indisponible.",
+      "La taille du fichier reste limitée à 10 Mio. Le corps HTTP dispose d’une marge supplémentaire de 64 Kio pour les métadonnées et les frontières multipart, contrôlée avant l’analyse des fichiers. Ce contrôle ne remplace pas les quotas, les limites de débit et le reverse proxy exigés pour une exploitation réelle."
+    ],
+    "steps": [],
+    "note": null
+  },
+  {
+    "title": "Responsabilités, propriété et références",
+    "screen": null,
+    "paragraphs": [
+      "Concepteur et propriétaire du projet : LOKALA LOMBOTO Jonathan. Propriétaire du présent document : LOKALA LOMBOTO Jonathan. L’emblème national utilisé a été fourni par le porteur du projet et reste distinct de cette attribution de conception.",
+      "Contexte proposé : République démocratique du Congo, Présidence de la République, Secrétariat Général, DANTIC, Division Bases de données, unité Analyse et développement des applications.",
+      "Références de fonctionnement : code et documentation de la version 0.1.0 ; documentation Keycloak pour l’identité et le blocage temporaire ; NIST SP 800-63B-4 pour la limitation des tentatives ; MDN et WebKit pour les possibilités d’installation PWA. Les règles institutionnelles de classification, de conservation, d’approbation et de déploiement doivent être validées par l’autorité compétente."
+    ],
+    "steps": [],
+    "note": "Édition 1.0 du manuel - 31 octobre 2026. Document explicatif du prototype ; aucune habilitation, autorisation de déploiement ou certification n’est conférée par ce document."
+  }
+]

@@ -75,3 +75,12 @@ def test_missing_session_rejected(setup):
     client,*_=setup
     del app.dependency_overrides[current_user]
     assert client.get("/api/v1/documents").status_code in [401,403]
+
+
+@pytest.mark.parametrize("extra", [0, 1])
+def test_exact_file_limit_preserved_with_multipart_overhead(setup, monkeypatch, extra):
+    client, db, *_ = setup
+    monkeypatch.setattr("app.main.scan", lambda _: None)
+    limit = settings().max_upload_bytes
+    response = client.post("/api/v1/documents", data={"title": "Boundary-size fictional file", "classification": 0}, files={"file": ("boundary.txt", b"a" * (limit + extra), "text/plain")})
+    assert response.status_code == (201 if extra == 0 else 413)

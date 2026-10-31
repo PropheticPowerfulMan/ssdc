@@ -1,0 +1,242 @@
+[
+  {
+    "file": "01-connexion-clair.png",
+    "title": "Accueil et connexion - thème aube minérale",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:22.858Z"
+  },
+  {
+    "file": "02-reglages-audio.png",
+    "title": "Réglages audio et test manuel",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:28.186Z"
+  },
+  {
+    "file": "03-installation.png",
+    "title": "Aide à l’installation PWA",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:30.102Z"
+  },
+  {
+    "file": "04-tableau-de-bord.png",
+    "title": "Tableau de bord - données fictives",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:33.855Z"
+  },
+  {
+    "file": "05-menu-replie.png",
+    "title": "Menu réduit sur ordinateur",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:36.660Z"
+  },
+  {
+    "file": "06-documents.png",
+    "title": "Répertoire documentaire",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:38.498Z"
+  },
+  {
+    "file": "07-recherche.png",
+    "title": "Recherche sur les documents visibles",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:39.443Z"
+  },
+  {
+    "file": "08-recherche-vide.png",
+    "title": "Recherche sans résultat",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:40.071Z"
+  },
+  {
+    "file": "09-filtre.png",
+    "title": "Filtre par classification",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:41.068Z"
+  },
+  {
+    "file": "10-consultation.png",
+    "title": "Consultation contrôlée et filigrane nominatif",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:42.701Z"
+  },
+  {
+    "file": "11-telechargement-demo.png",
+    "title": "Téléchargement indisponible dans la démonstration",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:44.116Z"
+  },
+  {
+    "file": "12-depot.png",
+    "title": "Formulaire de dépôt",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:46.366Z"
+  },
+  {
+    "file": "13-depot-demo.png",
+    "title": "Dépôt fictif : aucun fichier envoyé",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:47.888Z"
+  },
+  {
+    "file": "14-classifications.png",
+    "title": "Niveaux de classification proposés",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:51.320Z"
+  },
+  {
+    "file": "15-demandes.png",
+    "title": "Demande d’accès et liste autorisée",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:52.717Z"
+  },
+  {
+    "file": "16-demande-demo.png",
+    "title": "Demande fictive : session réelle nécessaire",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:53.988Z"
+  },
+  {
+    "file": "17-audit.png",
+    "title": "Journal d’événements synthétiques",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:55.567Z"
+  },
+  {
+    "file": "18-administration.png",
+    "title": "Configuration et limites de la version",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:56.371Z"
+  },
+  {
+    "file": "19-mode-sombre.png",
+    "title": "Tableau de bord en thème sombre",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 1440,
+      "height": 1100
+    },
+    "capturedAt": "2026-10-31T07:00:58.728Z"
+  },
+  {
+    "file": "20-mobile-tableau.png",
+    "title": "Tableau de bord mobile",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "capturedAt": "2026-10-31T07:01:00.204Z"
+  },
+  {
+    "file": "21-mobile-menu.png",
+    "title": "Tiroir de navigation mobile",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "capturedAt": "2026-10-31T07:01:01.130Z"
+  },
+  {
+    "file": "22-mobile-documents.png",
+    "title": "Documents en cartes sur téléphone",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "capturedAt": "2026-10-31T07:01:02.072Z"
+  },
+  {
+    "file": "23-mobile-connexion.png",
+    "title": "Page de connexion mobile",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "capturedAt": "2026-10-31T07:01:02.822Z"
+  },
+  {
+    "file": "24-tablette-connexion.png",
+    "title": "Page de connexion sur tablette",
+    "url": "http://127.0.0.1:5175/",
+    "viewport": {
+      "width": 768,
+      "height": 1024
+    },
+    "capturedAt": "2026-10-31T07:01:03.697Z"
+  }
+]
