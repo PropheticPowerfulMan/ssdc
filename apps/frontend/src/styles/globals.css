@@ -3263,3 +3263,21 @@ textarea {
     font-size: 10px;
   }
 }
+
+@media (max-width: 760px) {
+  .page-heading .upload-document-button {
+    display: grid;
+    place-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .upload-document-button > span {
+    display: none;
+  }
+  .page-heading .upload-document-button > svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+    margin: 0;
+  }
+}

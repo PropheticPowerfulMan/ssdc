@@ -673,12 +673,13 @@ export default function App({ startupError = "" }: { startupError?: string }) {
               </p>
             </div>
             <button
-              className="primary"
+              className="primary upload-document-button"
+              aria-label="Déposer un document"
               data-sound="uploadOpen"
               onClick={() => setUpload(true)}
             >
-              <Plus size={18} />
-              Déposer un document
+              <Plus size={18} aria-hidden="true" />
+              <span>Déposer un document</span>
             </button>
           </div>
           {demo && (
