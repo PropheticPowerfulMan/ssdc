@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - run: pip install --upgrade "setuptools>=84.1"
       - run: pip install -e './apps/backend[test]'
       - run: pytest
         working-directory: apps/backend

@@ -2,7 +2,7 @@ FROM python:3.11-slim
 WORKDIR /srv
 COPY pyproject.toml ./
 COPY app ./app
-RUN pip install --no-cache-dir . && useradd --uid 10001 --create-home ssdc && mkdir -p /srv/var/objects && chown -R ssdc:ssdc /srv/var
+RUN pip install --no-cache-dir --upgrade "setuptools>=84.1" && pip install --no-cache-dir . && useradd --uid 10001 --create-home ssdc && mkdir -p /srv/var/objects && chown -R ssdc:ssdc /srv/var
 COPY alembic.ini ./
 COPY migrations ./migrations
 USER ssdc
