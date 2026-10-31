@@ -438,7 +438,7 @@
       "Ces fonctions ne doivent pas être promises à un utilisateur comme déjà disponibles. La matrice de livraison du dépôt fait foi pour l’état courant. Ce manuel doit être révisé après chaque évolution du produit."
     ],
     "steps": [],
-    "note": "Le scan approfondi ne dispose pas encore d’un rapport final accessible à la date de rédaction. Les tests automatisés et un correctif ciblé ne constituent pas une certification de sécurité."
+    "note": "Le scan approfondi finalisé concerne l’instantané associé à la révision 905ef89. Il a relevé un défaut de consommation de ressources avant authentification, corrigé dans la version ultérieure avec des tests de régression. La couverture comporte des exclusions et ne valide pas toutes les intégrations réelles ; aucune certification de sécurité n’est conférée."
   },
   {
     "title": "Annexe : accès, erreurs et cycle documentaire",
