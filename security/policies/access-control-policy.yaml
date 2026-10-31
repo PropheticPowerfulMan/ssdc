@@ -1,0 +1,16 @@
+status: proposed
+access: default-deny
+roles: [reader, uploader, approver, auditor, admin]
+read_requires:
+  - active-account-and-online-session
+  - mfa-assurance-2
+  - reader-role
+  - unexpired-clearance-at-least-document-level
+  - all-document-compartments
+  - matching-department
+  - released-unexpired-document
+  - explicit-unexpired-named-grant
+approval:
+  requires: [approver-role, document-owner, valid-clearance-and-compartments]
+  self_approval: forbidden
+admin_content_bypass: false

@@ -1,0 +1,28 @@
+{
+  "proposed": true,
+  "levels": [
+    {
+      "rank": 0,
+      "label": "NON CLASSIFIÉ"
+    },
+    {
+      "rank": 1,
+      "label": "RESTREINT"
+    },
+    {
+      "rank": 2,
+      "label": "CONFIDENTIEL"
+    },
+    {
+      "rank": 3,
+      "label": "SECRET"
+    },
+    {
+      "rank": 4,
+      "label": "TRÈS SECRET"
+    }
+  ],
+  "default": "deny",
+  "need_to_know": "explicit expiring per-document grant",
+  "administrator_bypass": false
+}

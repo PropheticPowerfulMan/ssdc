@@ -1,0 +1,52 @@
+# Development with fictional data ONLY; this is not a production deployment.
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ssdc
+      POSTGRES_USER: ssdc
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run setup-dev.ps1}
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["postgres:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ssdc"]
+      interval: 5s
+      retries: 15
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.2
+    command: ["start-dev", "--import-realm"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:?Run setup-dev.ps1}
+      KC_HOSTNAME: http://localhost:8080
+      SSDC_OIDC_SECRET: ${OIDC_CLIENT_SECRET:?Run setup-dev.ps1}
+    ports: ["127.0.0.1:8080:8080"]
+    volumes:
+      - ./infrastructure/keycloak/ssdc-realm.json:/opt/keycloak/data/import/ssdc-realm.json:ro
+      - keycloak:/opt/keycloak/data
+  clamav:
+    image: clamav/clamav:stable
+    ports: ["127.0.0.1:3310:3310"]
+    volumes: ["clamav:/var/lib/clamav"]
+  backend:
+    build: ./apps/backend
+    environment:
+      ENVIRONMENT: development
+      DATABASE_URL: postgresql+psycopg://ssdc:${POSTGRES_PASSWORD}@postgres:5432/ssdc
+      OIDC_ISSUER: http://localhost:8080/realms/ssdc
+      OIDC_INTERNAL_URL: http://keycloak:8080/realms/ssdc
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET}
+      DEVELOPMENT_KEK: ${DEVELOPMENT_KEK:?Run setup-dev.ps1}
+      CLAMAV_HOST: clamav
+      STORAGE_PATH: /srv/var/objects
+    ports: ["127.0.0.1:8000:8000"]
+    volumes: ["objects:/srv/var/objects"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+volumes:
+  postgres:
+  keycloak:
+  clamav:
+  objects:
