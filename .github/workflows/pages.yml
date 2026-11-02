@@ -27,7 +27,7 @@ jobs:
           VITE_DEMO_MODE: 'true'
       - run: node --test scripts/test-pwa.mjs scripts/test-sounds.mjs
         working-directory: apps/frontend
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: apps/frontend/dist
   deploy:
